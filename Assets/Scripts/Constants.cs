@@ -8,6 +8,6 @@
         /// <summary>
         /// 
         /// </summary>
-        public const float G = 0.667408f;
+        public const float G = 0.006674f;
     }
 }
