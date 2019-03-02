@@ -14,7 +14,13 @@ public class Movement : MonoBehaviour
     /// 
     /// </summary>
     [SerializeField]
-    private float maxSpeed = 1000f;
+    private float posSpeed = 50f;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField]
+    private float rotSpeed = 25f;
 
     private void Start()
     {
@@ -27,15 +33,29 @@ public class Movement : MonoBehaviour
         if (!player) return;
 
         //
-        if (Input.GetKey(KeyCode.Q))
-            player.ApplyTorque(new Vector3(0, -0.0125f * Time.deltaTime, 0));
-        if (Input.GetKey(KeyCode.E))
-            player.ApplyTorque(new Vector3(0, 0.0125f * Time.deltaTime, 0));
+        if (Input.GetKey(KeyCode.W))
+        {
+            float currentX = player.GetRot().eulerAngles.x;
+            float changeRot = -rotSpeed * Time.deltaTime;
+
+            if (currentX == 0 || currentX <= 30 || currentX + changeRot > 330f)
+                player.SetRot(Quaternion.Euler(
+                    currentX + changeRot,
+                    player.GetRot().eulerAngles.y,
+                    player.GetRot().eulerAngles.z));
+        }
 
         //
-        player.ApplyForce(new Vector3(Input.GetAxis("Horizontal") * maxSpeed * Time.deltaTime, 0, 0));
+        if (Input.GetKey(KeyCode.S))
+        {
+            float currentX = player.GetRot().eulerAngles.x;
+            float changeRot = rotSpeed * Time.deltaTime;
 
-        //
-        player.ApplyForce(new Vector3(0, 0, Input.GetAxis("Vertical") * maxSpeed * Time.deltaTime));
+            if (currentX == 0 || currentX >= 330f || currentX + changeRot < 30f)
+                player.SetRot(Quaternion.Euler(
+                    currentX + changeRot,
+                    player.GetRot().eulerAngles.y,
+                    player.GetRot().eulerAngles.z));
+        }
     }
 }

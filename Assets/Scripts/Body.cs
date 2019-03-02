@@ -50,4 +50,10 @@ public class Body : MonoBehaviour
         GetComponent<Rigidbody>().AddTorque(incomingTorque, ForceMode.Force);
         return true;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="newRot"></param>
+    public void SetRot(Quaternion newRot) { transform.rotation = newRot; }
 }
