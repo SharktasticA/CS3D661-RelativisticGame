@@ -38,8 +38,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4718175631748894}
   - component: {fileID: 54419477497881188}
-  - component: {fileID: 114201984018868954}
   - component: {fileID: 114196379740036228}
+  - component: {fileID: 114778113049601672}
   m_Layer: 0
   m_Name: Generic Planet
   m_TagString: Body
@@ -55,7 +55,7 @@ Transform:
   m_GameObject: {fileID: 1031135918019638}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 4718175631748894}
   m_RootOrder: 0
@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1088550368050586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25, y: 0, z: 0}
+  m_LocalPosition: {x: -500, y: 0, z: 500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4069452244325370}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9214e2d4f7109043823dad1aa920b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114201984018868954
+--- !u!114 &114778113049601672
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,9 +150,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1088550368050586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d22db4c6d8d1ac4696400b42ea67185, type: 3}
+  m_Script: {fileID: 11500000, guid: 74251025c52d2034b9744d7aa3bd5694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orbitRotation: 0
+  rotationSpeed: 0.5
 --- !u!135 &135885040112896942
 SphereCollider:
   m_ObjectHideFlags: 1
