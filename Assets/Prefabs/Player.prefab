@@ -56,10 +56,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4078148893442374}
-  - component: {fileID: 54292758508454582}
   - component: {fileID: 114781448347833820}
   - component: {fileID: 114477650700132790}
   - component: {fileID: 114927892979543442}
+  - component: {fileID: 54921934279445074}
+  - component: {fileID: 114579834864643408}
+  - component: {fileID: 114743373003592650}
+  - component: {fileID: 114533199143426250}
   m_Layer: 0
   m_Name: Player
   m_TagString: Body
@@ -73,9 +76,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1667211317196702}
-  m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
-  m_LocalScale: {x: 1, y: 1, z: 10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -70}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4489298410432256}
   - {fileID: 4634691088178318}
@@ -90,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 1282428649024232}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.04}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children: []
   m_Father: {fileID: 4078148893442374}
   m_RootOrder: 0
@@ -102,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1045986375946380}
   m_LocalRotation: {x: 0.08715578, y: -0, z: -0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 0.049999997, z: -0.02}
+  m_LocalPosition: {x: 0, y: 0.01, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4078148893442374}
@@ -203,7 +206,7 @@ Skybox:
   m_GameObject: {fileID: 1045986375946380}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 860a66ca4259b384f9ec01b687f71c3c, type: 2}
---- !u!54 &54292758508454582
+--- !u!54 &54921934279445074
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,6 +262,41 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &114533199143426250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667211317196702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4596320421a575449258db11d25fa35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxImpulseSpeed: 0.25
+--- !u!114 &114579834864643408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667211317196702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9214e2d4f7109043823dad1aa920b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114743373003592650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667211317196702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b337f15502d2246a3c5e9c54890d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivity: 100
 --- !u!114 &114781448347833820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,7 +325,7 @@ MonoBehaviour:
     m_Bits: 305
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
-  antialiasingMode: 0
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -340,5 +378,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b337f15502d2246a3c5e9c54890d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 100
-  sensitivity: 0.25
+  sensitivity: 100

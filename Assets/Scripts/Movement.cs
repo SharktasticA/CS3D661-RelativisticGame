@@ -1,61 +1,139 @@
-﻿using UnityEngine;
+﻿/*
+    Player probe movement
+    Khalid Ali 2019
+*/
+
+using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
-/// 
+/// Handles impulse-based (inside star system) movement
 /// </summary>
+[RequireComponent(typeof(Ship))]
 public class Movement : MonoBehaviour
 {
     /// <summary>
-    /// 
+    /// The speed that the ship is currently at
     /// </summary>
-    private Body player;
+    private float currentSpeed;
 
     /// <summary>
-    /// 
+    /// Calculated change in rotation due to movement changes
     /// </summary>
-    [SerializeField]
-    private float posSpeed = 50f;
+    private Vector3 angleVelocity;
 
     /// <summary>
-    /// 
+    /// Local reference of the ship rotation's eular angles
+    /// </summary>
+    private Vector3 shipRotation;
+
+    /// <summary>
+    /// Modifier of controlling the rate of change when the player desires a change in movement/rotation
     /// </summary>
     [SerializeField]
-    private float rotSpeed = 25f;
+    private int sensitivity = 100;
 
-    private void Start()
+    /// <summary>
+    /// Local reference of the ship's variable class
+    /// </summary>
+    private Ship ship;
+
+    /// <summary>
+    /// Reference to impulse factor display element
+    /// </summary>
+    private GameObject speedFactorDisplay;
+
+    void Start()
     {
-        player = GetComponent<Body>();
+        ship = GetComponent<Ship>();
+        speedFactorDisplay = GameObject.FindGameObjectWithTag("Speedometre");
     }
 
-    private void Update()
+    /// <summary>
+    /// Polls for requested changes in impulse factor and specifies desired speed for the rest of the script
+    /// </summary>
+    void ManageImpulse()
     {
-        //
-        if (!player) return;
-
-        //
-        if (Input.GetKey(KeyCode.W))
+        //check if change in warp factor is requested
+        if (Input.GetKey(KeyCode.Alpha0))
         {
-            float currentX = player.GetRot().eulerAngles.x;
-            float changeRot = -rotSpeed * Time.deltaTime;
-
-            if (currentX == 0 || currentX <= 30 || currentX + changeRot > 330f)
-                player.SetRot(Quaternion.Euler(
-                    currentX + changeRot,
-                    player.GetRot().eulerAngles.y,
-                    player.GetRot().eulerAngles.z));
+            ship.SetSpeedFactor(SpeedFactor.Off);
+        }
+        else if (Input.GetKey(KeyCode.Alpha1))
+        {
+            speedFactorDisplay.transform.GetChild(0).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
+            ship.SetSpeedFactor(SpeedFactor.HalfQuarter);
+        }
+        else if (Input.GetKey(KeyCode.Alpha2))
+        {
+            speedFactorDisplay.transform.GetChild(0).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
+            ship.SetSpeedFactor(SpeedFactor.Quarter);
+        }
+        else if (Input.GetKey(KeyCode.Alpha3))
+        {
+            speedFactorDisplay.transform.GetChild(0).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
+            ship.SetSpeedFactor(SpeedFactor.Half);
+        }
+        else if (Input.GetKey(KeyCode.Alpha4))
+        {
+            speedFactorDisplay.transform.GetChild(0).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(true);
+            ship.SetSpeedFactor(SpeedFactor.Full);
+        }
+        else if (Input.GetKey(KeyCode.Minus))
+        {
+            speedFactorDisplay.transform.GetChild(0).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
+            ship.SetSpeedFactor(SpeedFactor.Reverse);
         }
 
-        //
-        if (Input.GetKey(KeyCode.S))
+        if (ship.GetSpeedFactor() == SpeedFactor.Off)
         {
-            float currentX = player.GetRot().eulerAngles.x;
-            float changeRot = rotSpeed * Time.deltaTime;
-
-            if (currentX == 0 || currentX >= 330f || currentX + changeRot < 30f)
-                player.SetRot(Quaternion.Euler(
-                    currentX + changeRot,
-                    player.GetRot().eulerAngles.y,
-                    player.GetRot().eulerAngles.z));
+            speedFactorDisplay.transform.GetChild(0).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
         }
+    }
+
+    /// <summary>
+    /// Polls for requested changes in ship rotations
+    /// </summary>
+    void ManageRotation()
+    {
+        if (Input.GetKey(KeyCode.W)) transform.GetChild(0).Rotate(Vector3.left * (sensitivity / 4) * Time.fixedDeltaTime);
+        else if (Input.GetKey(KeyCode.S)) transform.GetChild(0).Rotate(Vector3.right * (sensitivity / 4) * Time.fixedDeltaTime);
+
+        if (Input.GetKey(KeyCode.A)) transform.GetChild(0).Rotate(Vector3.down * (sensitivity / 4) * Time.fixedDeltaTime);
+        else if (Input.GetKey(KeyCode.D)) transform.GetChild(0).Rotate(Vector3.up * (sensitivity / 4) * Time.fixedDeltaTime);
+    }
+
+    /// <summary>
+    /// Ensures ship is travelling at desired speed
+    /// </summary>
+    void ManageAcceleration()
+    {
+        if (ship.GetSpeedFactor() == SpeedFactor.Off) return;
+        transform.Translate((transform.GetChild(0).forward * ship.GetImpulseSpeed()), Space.World);
+    }
+
+    void Update()
+    {
+        ManageImpulse();
+        ManageRotation();
+        ManageAcceleration();
     }
 }

@@ -25,6 +25,8 @@ public class Gravimetrics : MonoBehaviour
 
     private void FixedUpdate()
     {
+        float totalGrav = 0;
+
         for (int i = 0; i < others.Count; i++)
         {
             //
@@ -38,6 +40,7 @@ public class Gravimetrics : MonoBehaviour
 
                 //Magnitude (strength) of gravitational force
                 float magnitude = Constants.G * (others[i].GetMass() * GetComponent<Body>().GetMass() / Mathf.Pow(distance, 2));
+                totalGrav += magnitude;
 
                 //Convert calculation into workable force
                 ///Normalised to turn the direction into a length of 1,
@@ -45,9 +48,14 @@ public class Gravimetrics : MonoBehaviour
                 Vector3 force = (thisPos - otherPos).normalized * magnitude;
 
                 //Apply force
-                //Need for static casting will be removed in future revisions
                 GetComponent<Body>().ApplyForce(-force);
             }
+        }
+
+        if (GetComponent<Ship>())
+        {
+            //Cache total gravity calculated so it can be referenced elsewhere
+            GetComponent<Ship>().SetGrav(totalGrav);
         }
     }
 }
