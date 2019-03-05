@@ -127,7 +127,7 @@ public class Movement : MonoBehaviour
     void ManageAcceleration()
     {
         if (ship.GetSpeedFactor() == SpeedFactor.Off) return;
-        transform.Translate((transform.GetChild(0).forward * ship.GetImpulseSpeed()), Space.World);
+        transform.Translate((transform.GetChild(0).forward * ship.GetImpulseSpeed()) * Time.deltaTime, Space.World);
     }
 
     void Update()

@@ -26,7 +26,7 @@ class Ship : Body
     /// <summary>
     /// Enumerated factor of impulse the ship's engines are set to
     /// </summary>
-    private SpeedFactor speed = SpeedFactor.Off;
+    private SpeedFactor speedFactor = SpeedFactor.Off;
 
     /// <summary>
     /// 
@@ -40,16 +40,17 @@ class Ship : Body
 
     private void LateUpdate()
     {
-        relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = "Gravity: " + grav * 100 + "g";
-        relativisticsMetre.transform.GetChild(1).GetComponent<Text>().text = "Mass: " + GetMass() * 1000 + "kg";
-        relativisticsMetre.transform.GetChild(2).GetComponent<Text>().text = "Length: 0m";
+        relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = "Speed: " + GetSpeedKMS() + "km/s";
+        relativisticsMetre.transform.GetChild(1).GetComponent<Text>().text = "Gravity: " + grav * 100 + "g";
+        relativisticsMetre.transform.GetChild(2).GetComponent<Text>().text = "Mass: " + GetMass() * 1000 + "kg";
+        relativisticsMetre.transform.GetChild(3).GetComponent<Text>().text = "Length: 0m";
     }
 
     /// <summary>
     /// Returns ship's speed factor
     /// </summary>
     /// <returns>Enumerated factor of speed the ship's engines are set to</returns>
-    public SpeedFactor GetSpeedFactor() { return speed; }
+    public SpeedFactor GetSpeedFactor() { return speedFactor; }
 
     /// <summary>
     /// Returns impulse engine's desired speed
@@ -57,12 +58,12 @@ class Ship : Body
     /// <returns>Float of the desired speed</returns>
     public float GetImpulseSpeed()
     {
-        if (speed == SpeedFactor.HalfQuarter) return maxImpulseSpeed / 8;
-        else if (speed == SpeedFactor.Quarter) return maxImpulseSpeed / 4;
-        else if (speed == SpeedFactor.Half) return maxImpulseSpeed / 2;
-        else if (speed == SpeedFactor.Full) return maxImpulseSpeed;
-        else if (speed == SpeedFactor.Off) return 0;
-        else if (speed == SpeedFactor.Reverse) return -maxImpulseSpeed / 16;
+        if (speedFactor == SpeedFactor.HalfQuarter) return maxImpulseSpeed / 8;
+        else if (speedFactor == SpeedFactor.Quarter) return maxImpulseSpeed / 4;
+        else if (speedFactor == SpeedFactor.Half) return maxImpulseSpeed / 2;
+        else if (speedFactor == SpeedFactor.Full) return maxImpulseSpeed;
+        else if (speedFactor == SpeedFactor.Off) return 0;
+        else if (speedFactor == SpeedFactor.Reverse) return -maxImpulseSpeed / 16;
         else return 0;
     }
 
@@ -76,7 +77,7 @@ class Ship : Body
     /// Sets ship's impulse factor
     /// </summary>
     /// <param name="nSpeed">New speed factor for the engines to be set to</param>
-    public void SetSpeedFactor(SpeedFactor nSpeed) { speed = nSpeed; }
+    public void SetSpeedFactor(SpeedFactor nSpeed) { speedFactor = nSpeed; }
 
     /// <summary>
     /// 

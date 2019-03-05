@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.KArelativity
+﻿namespace Assets
 {
     /// <summary>
     /// 
@@ -8,6 +8,11 @@
         /// <summary>
         /// 
         /// </summary>
-        public const float G = 0.006674f;
+        public const float G = 0.06674f;
+
+        /// <summary>
+        /// km/s
+        /// </summary>
+        public const float C = 299792458f / 10000;
     }
 }
