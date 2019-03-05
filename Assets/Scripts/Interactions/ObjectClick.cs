@@ -51,7 +51,7 @@ public class ObjectClick : MonoBehaviour
     {
         clickedObjectMetre.transform.GetChild(0).GetComponent<Text>().text = "Selected: " + clickedObject.transform.name;
 
-        float distance = (transform.position - clickedObject.GetPos()).magnitude - clickedObject.GetSize();
+        float distance = Vector3.Distance(transform.position, clickedObject.GetPos()) - clickedObject.GetSize();
         clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * 100) + "km";
 
         timeout -= 1 * Time.deltaTime;

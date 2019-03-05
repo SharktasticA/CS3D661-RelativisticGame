@@ -44,7 +44,8 @@ public class Gravimetrics : MonoBehaviour
                 Vector3 otherPos = others[i].GetPos();
 
                 //Distance (difference magnitude) between this and other object
-                float distance = Mathf.Sqrt(Mathf.Pow(thisPos.x - otherPos.x, 2) + Mathf.Pow(thisPos.y - otherPos.y, 2) + Mathf.Pow(thisPos.z - otherPos.z, 2));
+                //float distance = Mathf.Sqrt(Mathf.Pow(thisPos.x - otherPos.x, 2) + Mathf.Pow(thisPos.y - otherPos.y, 2) + Mathf.Pow(thisPos.z - otherPos.z, 2));
+                float distance = Vector3.Distance(thisPos, otherPos);
 
                 //Magnitude (strength) of gravitational force
                 float magnitude = Constants.G * (others[i].GetMass() * body.GetMass() / Mathf.Pow(distance, 2));

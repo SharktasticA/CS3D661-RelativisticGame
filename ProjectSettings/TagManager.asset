@@ -8,6 +8,7 @@ TagManager:
   - Speedometre
   - Relativisticsmetre
   - ClickedObjectMetre
+  - Warning
   layers:
   - Default
   - TransparentFX
