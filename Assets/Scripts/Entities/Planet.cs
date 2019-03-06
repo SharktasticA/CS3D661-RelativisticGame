@@ -31,13 +31,4 @@ class Planet : Body
         else if (orbitRotation == Rotation.Anticlockwise)
             transform.Rotate(Vector3.down, rotationSpeed * Time.deltaTime);
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public float GetSize()
-    {
-        return transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.extents.x * transform.GetChild(0).localScale.x;
-    }
 }

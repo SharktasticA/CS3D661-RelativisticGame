@@ -21,6 +21,11 @@ public class Body : MonoBehaviour
     /// </summary>
     private float cooldown = 0.25f;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    private float grav = 0;
+
     private void FixedUpdate()
     {
         cooldown -= 1f * Time.fixedDeltaTime;
@@ -58,6 +63,12 @@ public class Body : MonoBehaviour
     /// 
     /// </summary>
     /// <returns></returns>
+    public float GetLength() { return (transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.extents.z * transform.GetChild(0).localScale.z); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public float GetSpeedKMS() { return speed * 10000; }
 
     /// <summary>
@@ -65,6 +76,12 @@ public class Body : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public float GetSpeedKPH() { return GetSpeedKMS() * 3600; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public float GetGrav() { return grav * 100; }
 
     /// <summary>
     /// 
@@ -101,4 +118,24 @@ public class Body : MonoBehaviour
     /// </summary>
     /// <param name="newMass"></param>
     public void SetMass(float newMass) { GetComponent<Rigidbody>().mass = newMass; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="newLength"></param>
+    public void SetLength(float newLength)
+    {
+        Vector3 newScale = new Vector3(
+            transform.GetChild(0).localScale.x,
+            transform.GetChild(0).localScale.y,
+            newLength / transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.extents.z);
+
+        transform.GetChild(0).localScale = newScale;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="newGrav"></param>
+    public void SetGrav(float newGrav) { grav = newGrav; }
 }

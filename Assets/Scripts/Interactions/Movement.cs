@@ -49,6 +49,18 @@ public class Movement : MonoBehaviour
         speedFactorDisplay = GameObject.FindGameObjectWithTag("Speedometre");
     }
 
+    void Update()
+    {
+        ManageImpulse();
+        ManageRotation();
+        ManageAcceleration();
+
+        if (currentSpeed < ship.GetImpulseSpeed())
+            currentSpeed += (ship.GetImpulseSpeed() / 2) * Time.deltaTime;
+        else if (currentSpeed > ship.GetImpulseSpeed())
+            currentSpeed -= (ship.GetImpulseSpeed() / 2) * Time.deltaTime;
+    }
+
     /// <summary>
     /// Polls for requested changes in impulse factor and specifies desired speed for the rest of the script
     /// </summary>
@@ -119,6 +131,9 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A)) transform.GetChild(0).Rotate(Vector3.down * (sensitivity / 8) * Time.fixedDeltaTime);
         else if (Input.GetKey(KeyCode.D)) transform.GetChild(0).Rotate(Vector3.up * (sensitivity / 8) * Time.fixedDeltaTime);
+
+        if (Input.GetKey(KeyCode.Q)) transform.GetChild(0).Rotate(Vector3.forward * (sensitivity / 8) * Time.fixedDeltaTime);
+        else if (Input.GetKey(KeyCode.E)) transform.GetChild(0).Rotate(Vector3.back * (sensitivity / 8) * Time.fixedDeltaTime);
     }
 
     /// <summary>
@@ -127,13 +142,6 @@ public class Movement : MonoBehaviour
     void ManageAcceleration()
     {
         if (ship.GetSpeedFactor() == SpeedFactor.Off) return;
-        transform.Translate((transform.GetChild(0).forward * ship.GetImpulseSpeed()) * Time.deltaTime, Space.World);
-    }
-
-    void Update()
-    {
-        ManageImpulse();
-        ManageRotation();
-        ManageAcceleration();
+        transform.Translate(transform.GetChild(0).forward * currentSpeed * Time.deltaTime, Space.World);
     }
 }

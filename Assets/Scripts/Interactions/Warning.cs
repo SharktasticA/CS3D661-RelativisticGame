@@ -27,7 +27,7 @@ public class Warning : MonoBehaviour
         for (int i = 0; i < planets.Length; i++)
         {
             //*100 to convert into KM
-            float distance = (Vector3.Distance(transform.position, planets[i].GetPos()) - planets[i].GetSize()) * 100;
+            float distance = (Vector3.Distance(transform.position, planets[i].GetPos()) - planets[i].GetLength()) * 100;
 
             if (distance <= 1000)
             {

@@ -13,11 +13,6 @@ public enum SpeedFactor { Reverse, Off, HalfQuarter, Quarter, Half, Full };
 class Ship : Body
 {
     /// <summary>
-    /// 
-    /// </summary>
-    protected float grav = 0;
-
-    /// <summary>
     /// Maximum speed this ship can travel in star systems at (Full Impulse)
     /// </summary>
     [SerializeField]
@@ -33,17 +28,22 @@ class Ship : Body
     /// </summary>
     private GameObject relativisticsMetre;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    private float cooldown = 0.25f;
+
     private void Start()
     {
         relativisticsMetre = GameObject.FindGameObjectWithTag("Relativisticsmetre");
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = "Speed: " + GetSpeedKMS() + "km/s";
-        relativisticsMetre.transform.GetChild(1).GetComponent<Text>().text = "Gravity: " + grav * 100 + "g";
+        relativisticsMetre.transform.GetChild(1).GetComponent<Text>().text = "Gravity: " + GetGrav() + "g";
         relativisticsMetre.transform.GetChild(2).GetComponent<Text>().text = "Mass: " + GetMass() * 1000 + "kg";
-        relativisticsMetre.transform.GetChild(3).GetComponent<Text>().text = "Length: 0m";
+        relativisticsMetre.transform.GetChild(3).GetComponent<Text>().text = "Length: " + GetLength() * 100 + "m";
     }
 
     /// <summary>
@@ -68,20 +68,8 @@ class Ship : Body
     }
 
     /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public float GetGrav() { return grav; }
-
-    /// <summary>
     /// Sets ship's impulse factor
     /// </summary>
     /// <param name="nSpeed">New speed factor for the engines to be set to</param>
     public void SetSpeedFactor(SpeedFactor nSpeed) { speedFactor = nSpeed; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="newGrav"></param>
-    public void SetGrav(float newGrav) { grav = newGrav; }
 }
