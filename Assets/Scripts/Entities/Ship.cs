@@ -31,15 +31,24 @@ class Ship : Body
     /// <summary>
     /// 
     /// </summary>
-    private float cooldown = 0.25f;
+    private ShipRotator[] rotatables;
 
     private void Start()
     {
         relativisticsMetre = GameObject.FindGameObjectWithTag("Relativisticsmetre");
+        rotatables = FindObjectsOfType<ShipRotator>();
     }
 
     private void Update()
     {
+        speed = Mathf.Lerp(speed, GetImpulseSpeed(), 0.01f);
+        //speed = GetImpulseSpeed();
+
+        //
+        for (int i = 0; i < rotatables.Length; i++)
+            rotatables[i].SetSpeed(speed * 10);
+
+        //
         relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = "Speed: " + GetSpeedKMS() + "km/s";
         relativisticsMetre.transform.GetChild(1).GetComponent<Text>().text = "Gravity: " + GetGrav() + "g";
         relativisticsMetre.transform.GetChild(2).GetComponent<Text>().text = "Mass: " + GetMass() * 1000 + "kg";

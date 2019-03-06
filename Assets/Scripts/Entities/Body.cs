@@ -9,33 +9,12 @@ public class Body : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    private Vector3 lastPos;
-
-    /// <summary>
-    /// 
-    /// </summary>
     protected float speed = 0;
 
     /// <summary>
     /// 
     /// </summary>
-    private float cooldown = 0.25f;
-
-    /// <summary>
-    /// 
-    /// </summary>
     private float grav = 0;
-
-    private void FixedUpdate()
-    {
-        cooldown -= 1f * Time.fixedDeltaTime;
-        if (cooldown <= 0f)
-        {
-            speed = (transform.position - lastPos).magnitude * Time.fixedDeltaTime;
-            lastPos = transform.position;
-            cooldown = 0.25f;
-        }
-    }
 
     /// <summary>
     /// 
@@ -69,7 +48,13 @@ public class Body : MonoBehaviour
     /// 
     /// </summary>
     /// <returns></returns>
-    public float GetSpeedKMS() { return speed * 10000; }
+    public float GetSpeed() { return speed; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public float GetSpeedKMS() { return speed * 100; }
 
     /// <summary>
     /// 

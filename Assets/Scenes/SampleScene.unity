@@ -1175,7 +1175,21 @@ Prefab:
       propertyPath: maxImpulseSpeed
       value: 100
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4469644267932130, guid: 67fb7c356c0f54d458a9f42c874fd6a0, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469644267932130, guid: 67fb7c356c0f54d458a9f42c874fd6a0, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469644267932130, guid: 67fb7c356c0f54d458a9f42c874fd6a0, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114477650700132790, guid: 67fb7c356c0f54d458a9f42c874fd6a0, type: 2}
+    - {fileID: 114927892979543442, guid: 67fb7c356c0f54d458a9f42c874fd6a0, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 67fb7c356c0f54d458a9f42c874fd6a0, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1720489605

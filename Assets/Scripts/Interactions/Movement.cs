@@ -54,11 +54,6 @@ public class Movement : MonoBehaviour
         ManageImpulse();
         ManageRotation();
         ManageAcceleration();
-
-        if (currentSpeed < ship.GetImpulseSpeed())
-            currentSpeed += (ship.GetImpulseSpeed() / 2) * Time.deltaTime;
-        else if (currentSpeed > ship.GetImpulseSpeed())
-            currentSpeed -= (ship.GetImpulseSpeed() / 2) * Time.deltaTime;
     }
 
     /// <summary>
@@ -126,12 +121,15 @@ public class Movement : MonoBehaviour
     /// </summary>
     void ManageRotation()
     {
+        //
         if (Input.GetKey(KeyCode.W)) transform.GetChild(0).Rotate(Vector3.left * (sensitivity / 8) * Time.fixedDeltaTime);
         else if (Input.GetKey(KeyCode.S)) transform.GetChild(0).Rotate(Vector3.right * (sensitivity / 8) * Time.fixedDeltaTime);
 
+        //
         if (Input.GetKey(KeyCode.A)) transform.GetChild(0).Rotate(Vector3.down * (sensitivity / 8) * Time.fixedDeltaTime);
         else if (Input.GetKey(KeyCode.D)) transform.GetChild(0).Rotate(Vector3.up * (sensitivity / 8) * Time.fixedDeltaTime);
 
+        //
         if (Input.GetKey(KeyCode.Q)) transform.GetChild(0).Rotate(Vector3.forward * (sensitivity / 8) * Time.fixedDeltaTime);
         else if (Input.GetKey(KeyCode.E)) transform.GetChild(0).Rotate(Vector3.back * (sensitivity / 8) * Time.fixedDeltaTime);
     }
@@ -142,6 +140,6 @@ public class Movement : MonoBehaviour
     void ManageAcceleration()
     {
         if (ship.GetSpeedFactor() == SpeedFactor.Off) return;
-        transform.Translate(transform.GetChild(0).forward * currentSpeed * Time.deltaTime, Space.World);
+        transform.Translate(transform.GetChild(0).forward * ship.GetSpeed() * Time.deltaTime, Space.World);
     }
 }

@@ -23,4 +23,18 @@ public class ShipRotator : MonoBehaviour
         else if (orbitRotation == Rotation.Anticlockwise)
             transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
     }
+
+    /// <summary>
+    /// /
+    /// </summary>
+    /// <param name="newSpeed"></param>
+    public void SetSpeed(float newSpeed)
+    {
+        if (newSpeed > 1250f)
+            newSpeed = 1250f;
+        else if (newSpeed < -1250f)
+            newSpeed = -1250f;
+        else
+            rotationSpeed = newSpeed;
+    }
 }
