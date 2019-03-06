@@ -9,6 +9,7 @@ TagManager:
   - Relativisticsmetre
   - ClickedObjectMetre
   - Warning
+  - RotatablePart
   layers:
   - Default
   - TransparentFX
