@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74251025c52d2034b9744d7aa3bd5694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbitRotation: 0
-  rotationSpeed: 0.5
+  orbitRotation: 1
+  rotationSpeed: 1
 --- !u!135 &135885040112896942
 SphereCollider:
   m_ObjectHideFlags: 1

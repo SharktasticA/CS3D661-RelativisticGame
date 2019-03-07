@@ -32,18 +32,25 @@ public class Relativistics : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //
-        float beta = Lorentz(body.GetSpeedKMS());
+        if (body)
+        {
+            //
+            float beta = Lorentz(body.GetSpeedKMS());
 
-        //
-        float R = startMass / beta;
-        if (!float.IsNaN(R))
-            body.SetMass(R);
+            //
+            float R = startMass / beta;
+            if (!float.IsNaN(R))
+                body.SetMass(R);
 
-        //
-        float L = startLength * beta;
-        if (!float.IsNaN(L))
-            body.SetLength(L);
+            //Due to floating origin, only the ship can experience length contraction
+            if (body.GetComponentInChildren<Ship>())
+            {
+                //
+                float L = startLength * beta;
+                if (!float.IsNaN(L))
+                    body.SetLength(L);
+            }
+        }
     }
 
     /// <summary>
