@@ -67,12 +67,12 @@ class Ship : Body
     /// <returns>Float of the desired speed</returns>
     public float GetImpulseSpeed()
     {
-        if (speedFactor == SpeedFactor.HalfQuarter) return maxImpulseSpeed / 8;
+        if (speedFactor == SpeedFactor.Off) return 0;
+        else if (speedFactor == SpeedFactor.Reverse) return -maxImpulseSpeed / 16;
+        else if (speedFactor == SpeedFactor.HalfQuarter) return maxImpulseSpeed / 8;
         else if (speedFactor == SpeedFactor.Quarter) return maxImpulseSpeed / 4;
         else if (speedFactor == SpeedFactor.Half) return maxImpulseSpeed / 2;
         else if (speedFactor == SpeedFactor.Full) return maxImpulseSpeed;
-        else if (speedFactor == SpeedFactor.Off) return 0;
-        else if (speedFactor == SpeedFactor.Reverse) return -maxImpulseSpeed / 16;
         else return 0;
     }
 

@@ -76,7 +76,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AirGlowStrength: 0.01
-    - _AtmosphereMultiply: 3
+    - _AtmosphereMultiply: 1
     - _AtmospherePow: 8
     - _BumpScale: 1
     - _CloudShadowsStrength: 0
@@ -101,7 +101,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _AtmosphereColor: {r: 1, g: 0.259911, b: 0.1462264, a: 1}
+    - _AtmosphereColor: {r: 0.13207549, g: 0.017569676, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 340.44495, g: 340.44495, b: 340.44495, a: 0}
     - _Color2: {r: 226, g: 183, b: 25, a: 0}

@@ -19,6 +19,27 @@ public class Body : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
+    private Vector3 lastPos;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private float cooldown = 0.25f;
+
+    private void FixedUpdate()
+    {
+        cooldown -= 1f * Time.fixedDeltaTime;
+        if (cooldown <= 0f)
+        {
+            speed += (transform.position - lastPos).magnitude * Time.fixedDeltaTime;
+            lastPos = transform.position;
+            cooldown = 0.25f;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <returns></returns>
     public Vector3 GetPos() { return transform.position; }
     /// <summary>
