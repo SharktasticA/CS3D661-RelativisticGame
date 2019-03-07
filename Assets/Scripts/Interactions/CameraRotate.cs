@@ -25,6 +25,7 @@ public class CameraRotate : MonoBehaviour
     {
         cameraOffset = transform.position;
         cameraRotate = transform.rotation.eulerAngles;
+        transform.RotateAround(transform.parent.GetChild(0).position, Vector3.up, Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime);
     }
 
     /// <summary>

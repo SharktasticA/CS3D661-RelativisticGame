@@ -72,6 +72,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
             ship.SetSpeedFactor(SpeedFactor.HalfQuarter);
         }
         else if (Input.GetKey(KeyCode.Alpha2))
@@ -80,6 +81,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(true);
             speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
             ship.SetSpeedFactor(SpeedFactor.Quarter);
         }
         else if (Input.GetKey(KeyCode.Alpha3))
@@ -88,6 +90,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(true);
             speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(true);
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
             ship.SetSpeedFactor(SpeedFactor.Half);
         }
         else if (Input.GetKey(KeyCode.Alpha4))
@@ -96,6 +99,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(true);
             speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(true);
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(true);
+            speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
             ship.SetSpeedFactor(SpeedFactor.Full);
         }
         else if (Input.GetKey(KeyCode.Minus))
@@ -104,6 +108,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(true);
             ship.SetSpeedFactor(SpeedFactor.Reverse);
         }
 
@@ -113,6 +118,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
+            speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
         }
     }
 
