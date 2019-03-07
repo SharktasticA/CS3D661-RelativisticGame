@@ -61,10 +61,6 @@ public class Gravimetrics : MonoBehaviour
             }
         }
 
-        if (GetComponent<Ship>())
-        {
-            //Cache total gravity calculated so it can be referenced elsewhere
-            GetComponent<Ship>().SetGrav(totalGrav);
-        }
+        body.SetGrav(totalGrav);
     }
 }
