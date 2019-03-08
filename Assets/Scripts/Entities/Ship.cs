@@ -46,7 +46,7 @@ class Ship : Body
 
         //
         for (int i = 0; i < rotatables.Length; i++)
-            rotatables[i].SetSpeed(speed * 10);
+            rotatables[i].SetSpeed(speed * 2.5f);
 
         //
         relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = "Speed: " + GetSpeedKMS() + "km/s";

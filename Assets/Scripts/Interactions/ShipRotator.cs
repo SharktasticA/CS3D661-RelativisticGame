@@ -30,10 +30,10 @@ public class ShipRotator : MonoBehaviour
     /// <param name="newSpeed"></param>
     public void SetSpeed(float newSpeed)
     {
-        if (newSpeed > 1250f)
-            newSpeed = 1250f;
-        else if (newSpeed < -1250f)
-            newSpeed = -1250f;
+        if (newSpeed > 1000f)
+            newSpeed = 1000f;
+        else if (newSpeed < -1000f)
+            newSpeed = -1000f;
         else
             rotationSpeed = newSpeed;
     }
