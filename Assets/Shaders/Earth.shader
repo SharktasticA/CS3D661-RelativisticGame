@@ -9,8 +9,9 @@ Shader "Earth"
 		_AtmosphereMultiply ("Atmosphere Multiply", Range(1, 3)) = 1.5
 
 		_DiffuseTex("Diffuse", 2D) = "white" {}
-		
-		_CloudAndNightTex("Cloud And Night", 2D) = "black" {}
+
+		_NightTex("Night", 2D) = "black" {}
+		_CloudTex("Cloud", 2D) = "black" {}
 
 		//_LightDir("Light Dir", Vector) = (-1,0,0,1)
 	}
@@ -28,7 +29,8 @@ Shader "Earth"
 			#pragma fragment frag
 			
 			sampler2D _DiffuseTex;
-			sampler2D _CloudAndNightTex;
+			sampler2D _NightTex;
+			sampler2D _CloudTex;
 
 			float4 _AtmosphereColor;
 			float _AtmospherePow;
@@ -72,10 +74,8 @@ Shader "Earth"
 			half4 frag(vertexOutput input) : Color
 			{
 				half3 colorSample = tex2D(_DiffuseTex, input.uv).rgb;
-
-				half3 cloudAndNightSample = tex2D(_CloudAndNightTex, input.uv).rgb;
-				half3 nightSample = cloudAndNightSample.ggb;
-				half cloudSample = cloudAndNightSample.r;
+				half3 nightSample = tex2D(_NightTex, input.uv).rgb;
+				half3 cloudSample = tex2D(_CloudTex, input.uv).rgb;
 
 				half4 result;
 				result.rgb = (colorSample + cloudSample) * input.diffuse + nightSample * input.night + input.atmosphere;
