@@ -2,53 +2,55 @@
 using UnityEngine.UI;
 
 /// <summary>
-/// Enumeration of possible settings for a ship's impulse engines
+/// Enumeration of possible speed factors the ship's impulse engines can support.
 /// </summary>
-public enum SpeedFactor { Reverse, Off, HalfQuarter, Quarter, Half, Full };
+public enum SpeedFactor { Reverse = -8, Zero = 0, One = 16, Two = 8, Three = 4, Full = 1 };
 
 /// <summary>
-/// 
+/// Body-subclass for scene ship objects.
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 class Ship : Body
 {
     /// <summary>
-    /// Maximum speed this ship can travel in star systems at (Full Impulse)
+    /// The maximum speed this ship can travel at when SpeedFactor is Full
     /// </summary>
     [SerializeField]
-    private float maxImpulseSpeed = 0.5f;
+    private float maxSpeed = 250f;
 
     /// <summary>
-    /// Enumerated factor of impulse the ship's engines are set to
+    /// Impulse factor this ship is set to use.
     /// </summary>
-    private SpeedFactor speedFactor = SpeedFactor.Off;
+    private SpeedFactor speedFactor = SpeedFactor.Zero;
 
     /// <summary>
-    /// 
+    /// Internal reference to relativistics UI display.
     /// </summary>
     private GameObject relativisticsMetre;
 
     /// <summary>
-    /// 
+    /// Internal reference to all parts of the ship that can rotate.
     /// </summary>
     private ShipRotator[] rotatables;
 
     private void Start()
     {
+        //Get relativistics UI reference
         relativisticsMetre = GameObject.FindGameObjectWithTag("Relativisticsmetre");
+        //Find all rotatable ship parts
         rotatables = FindObjectsOfType<ShipRotator>();
     }
 
     private void Update()
     {
-        speed = Mathf.Lerp(speed, GetImpulseSpeed(), 0.01f);
-        //speed = GetImpulseSpeed();
+        //Gradually accelerate/decelerate the ship to the desired speed
+        speed = Mathf.Lerp(speed, GetSpeedTarget(), 0.01f);
 
-        //
+        //Ensure all rotatable ship parts turn at the proper speed
         for (int i = 0; i < rotatables.Length; i++)
             rotatables[i].SetSpeed(speed * 2.5f);
 
-        //
+        //Update all relativistic UI display readouts
         relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = "Speed: " + GetSpeedKMS() + "km/s";
         relativisticsMetre.transform.GetChild(1).GetComponent<Text>().text = "Gravity: " + GetGrav() + "g";
         relativisticsMetre.transform.GetChild(2).GetComponent<Text>().text = "Mass: " + GetMass() * 1000 + "kg";
@@ -56,29 +58,22 @@ class Ship : Body
     }
 
     /// <summary>
-    /// Returns ship's speed factor
+    /// Returns ship's impulse factor setting.
     /// </summary>
-    /// <returns>Enumerated factor of speed the ship's engines are set to</returns>
     public SpeedFactor GetSpeedFactor() { return speedFactor; }
 
     /// <summary>
-    /// Returns impulse engine's desired speed
+    /// Returns ship's target speed.
     /// </summary>
-    /// <returns>Float of the desired speed</returns>
-    public float GetImpulseSpeed()
+    public float GetSpeedTarget()
     {
-        if (speedFactor == SpeedFactor.Off) return 0;
-        else if (speedFactor == SpeedFactor.Reverse) return -maxImpulseSpeed / 16;
-        else if (speedFactor == SpeedFactor.HalfQuarter) return maxImpulseSpeed / 8;
-        else if (speedFactor == SpeedFactor.Quarter) return maxImpulseSpeed / 4;
-        else if (speedFactor == SpeedFactor.Half) return maxImpulseSpeed / 2;
-        else if (speedFactor == SpeedFactor.Full) return maxImpulseSpeed;
-        else return 0;
+        if (speedFactor == SpeedFactor.Zero) return 0;
+        else return maxSpeed / (int)speedFactor;
     }
 
     /// <summary>
-    /// Sets ship's impulse factor
+    /// Accepts and sets the ship's impulse factor setting.
     /// </summary>
-    /// <param name="nSpeed">New speed factor for the engines to be set to</param>
+    /// <param name="nSpeed">New SpeedFactor setting for the ship's impulse engines.</param>
     public void SetSpeedFactor(SpeedFactor nSpeed) { speedFactor = nSpeed; }
 }

@@ -1,136 +1,103 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// 
+/// Basic physics-enabled scene object class. This class is inherited
+/// by Planet, Ship.
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class Body : MonoBehaviour
 {
     /// <summary>
-    /// 
+    /// Internal reference to this object's Rigidbody.
+    /// </summary>
+    protected Rigidbody rb;
+
+    /// <summary>
+    /// Cached overall speed of the object, factoring in impulse and
+    /// gravitational pull.
     /// </summary>
     protected float speed = 0;
 
     /// <summary>
-    /// 
+    /// Cached gravitational force applied on this object from neighbours.
     /// </summary>
     private float grav = 0;
 
     /// <summary>
-    /// 
+    /// Cached last position used for calculating the speed of the object
+    /// from how its being pushed by gravity.
     /// </summary>
     private Vector3 lastPos;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    private float cooldown = 0.25f;
+    private void Awake()
+    {
+        //Get reference to RB
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate()
     {
-        cooldown -= 1f * Time.fixedDeltaTime;
-        if (cooldown <= 0f)
-        {
-            speed += (transform.position - lastPos).magnitude * Time.fixedDeltaTime;
-            lastPos = transform.position;
-            cooldown = 0.25f;
-        }
+        //Work out speed due to gravity pull so that non-ship objects can have
+        //some sort of speed reading.
+        speed += (transform.position - lastPos).magnitude * Time.fixedDeltaTime;
+        lastPos = transform.position;
     }
 
     /// <summary>
-    /// 
+    /// Returns the object's current mass.
     /// </summary>
-    /// <returns></returns>
-    public Vector3 GetPos() { return transform.position; }
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public Quaternion GetRot() { return transform.rotation; }
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public Vector3 GetScale() { return transform.localScale; }
+    public float GetMass() { return rb.mass; }
 
     /// <summary>
-    /// 
+    /// Returns the object's current length (or diametre).
     /// </summary>
-    /// <returns></returns>
-    public float GetMass() { return GetComponent<Rigidbody>().mass; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
     public float GetLength() { return (transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.extents.z * transform.GetChild(0).localScale.z); }
 
     /// <summary>
-    /// 
+    /// Returns the object's overall speed.
     /// </summary>
-    /// <returns></returns>
     public float GetSpeed() { return speed; }
 
     /// <summary>
-    /// 
+    /// Returns the object's speed in kilometres per second.
     /// </summary>
-    /// <returns></returns>
     public float GetSpeedKMS() { return speed * 100; }
 
     /// <summary>
-    /// 
+    /// Returns the object's speed in kilometres per hour.
     /// </summary>
-    /// <returns></returns>
     public float GetSpeedKPH() { return GetSpeedKMS() * 3600; }
 
     /// <summary>
-    /// 
+    /// Returns overall gravitational force being applied to the object.
     /// </summary>
-    /// <returns></returns>
     public float GetGrav() { return grav * 100; }
 
     /// <summary>
-    /// 
+    /// Accepts and applies given force against this object.
     /// </summary>
-    /// <param name="incomingForce"></param>
-    /// <returns></returns>
-    public bool ApplyForce(Vector3 incomingForce)
-    {
-        if (!GetComponent<Rigidbody>()) return false;
-        GetComponent<Rigidbody>().AddForce(incomingForce, ForceMode.Force);
-        return true;
-    }
+    /// <param name="incomingForce">The force you want to apply against the object.</param>
+    public void ApplyForce(Vector3 incomingForce) { rb.AddForce(incomingForce, ForceMode.Force); }
 
     /// <summary>
-    /// 
+    /// Accepts and applies given torque against this object.
     /// </summary>
-    /// <param name="incomingTorque"></param>
-    /// <returns></returns>
-    public bool ApplyTorque(Vector3 incomingTorque)
-    {
-        if (!GetComponent<Rigidbody>()) return false;
-        GetComponent<Rigidbody>().AddTorque(incomingTorque, ForceMode.Force);
-        return true;
-    }
+    /// <param name="incomingTorque">The torque you want to apply against the object.</param>
+    public void ApplyTorque(Vector3 incomingTorque) { rb.AddTorque(incomingTorque, ForceMode.Force); }
 
     /// <summary>
-    /// 
+    /// Accepts and sets new mass value to this object's rigidbody.
     /// </summary>
-    /// <param name="newRot"></param>
-    public void SetRot(Quaternion newRot) { transform.rotation = newRot; }
+    /// <param name="newMass">The new mass.</param>
+    public void SetMass(float newMass) { rb.mass = newMass; }
 
     /// <summary>
-    /// 
+    /// Accepts and sets new length on usual direction of travel.
     /// </summary>
-    /// <param name="newMass"></param>
-    public void SetMass(float newMass) { GetComponent<Rigidbody>().mass = newMass; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="newLength"></param>
+    /// <param name="newLength">The new length.</param>
     public void SetLength(float newLength)
     {
+        //Compile a new scale vector
         Vector3 newScale = new Vector3(
             transform.GetChild(0).localScale.x,
             transform.GetChild(0).localScale.y,
@@ -140,8 +107,8 @@ public class Body : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Accepts and stores the gravititional force being applied against this object.
     /// </summary>
-    /// <param name="newGrav"></param>
-    public void SetGrav(float newGrav) { grav = newGrav; }
+    /// <param name="newGrav">The new grav.</param>
+    public void StoreGrav(float newGrav) { grav = newGrav; }
 }

@@ -64,7 +64,7 @@ public class Movement : MonoBehaviour
         //check if change in warp factor is requested
         if (Input.GetKey(KeyCode.Alpha0))
         {
-            ship.SetSpeedFactor(SpeedFactor.Off);
+            ship.SetSpeedFactor(SpeedFactor.Zero);
         }
         else if (Input.GetKey(KeyCode.Alpha1))
         {
@@ -73,7 +73,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
-            ship.SetSpeedFactor(SpeedFactor.HalfQuarter);
+            ship.SetSpeedFactor(SpeedFactor.One);
         }
         else if (Input.GetKey(KeyCode.Alpha2))
         {
@@ -82,7 +82,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
-            ship.SetSpeedFactor(SpeedFactor.Quarter);
+            ship.SetSpeedFactor(SpeedFactor.Two);
         }
         else if (Input.GetKey(KeyCode.Alpha3))
         {
@@ -91,7 +91,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(2).gameObject.SetActive(true);
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
-            ship.SetSpeedFactor(SpeedFactor.Half);
+            ship.SetSpeedFactor(SpeedFactor.Three);
         }
         else if (Input.GetKey(KeyCode.Alpha4))
         {
@@ -112,7 +112,7 @@ public class Movement : MonoBehaviour
             ship.SetSpeedFactor(SpeedFactor.Reverse);
         }
 
-        if (ship.GetSpeedFactor() == SpeedFactor.Off)
+        if (ship.GetSpeedFactor() == SpeedFactor.Zero)
         {
             speedFactorDisplay.transform.GetChild(0).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(false);
@@ -145,7 +145,7 @@ public class Movement : MonoBehaviour
     /// </summary>
     void ManageAcceleration()
     {
-        if (ship.GetSpeedFactor() == SpeedFactor.Off) return;
+        if (ship.GetSpeedFactor() == SpeedFactor.Zero) return;
         transform.Translate(transform.GetChild(0).forward * ship.GetSpeed() * Time.deltaTime, Space.World);
     }
 }

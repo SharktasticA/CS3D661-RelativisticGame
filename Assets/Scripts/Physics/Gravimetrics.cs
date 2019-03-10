@@ -40,8 +40,8 @@ public class Gravimetrics : MonoBehaviour
             //
             if (others[i] != body && others[i].GetComponent<Rigidbody>())
             {
-                Vector3 thisPos = body.GetPos();
-                Vector3 otherPos = others[i].GetPos();
+                Vector3 thisPos = body.transform.position;
+                Vector3 otherPos = others[i].transform.position;
 
                 //Distance (difference magnitude) between this and other object
                 //float distance = Mathf.Sqrt(Mathf.Pow(thisPos.x - otherPos.x, 2) + Mathf.Pow(thisPos.y - otherPos.y, 2) + Mathf.Pow(thisPos.z - otherPos.z, 2));
@@ -61,6 +61,6 @@ public class Gravimetrics : MonoBehaviour
             }
         }
 
-        body.SetGrav(totalGrav);
+        body.StoreGrav(totalGrav);
     }
 }
