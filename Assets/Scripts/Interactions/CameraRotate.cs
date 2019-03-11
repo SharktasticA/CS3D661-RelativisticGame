@@ -25,7 +25,7 @@ public class CameraRotate : MonoBehaviour
     {
         cameraOffset = transform.position;
         cameraRotate = transform.rotation.eulerAngles;
-        transform.RotateAround(transform.parent.GetChild(0).position, Vector3.up, Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime);
+        //transform.RotateAround(transform.parent.GetChild(0).position, Vector3.up, Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime);
     }
 
     /// <summary>
@@ -41,6 +41,11 @@ public class CameraRotate : MonoBehaviour
         else if (Input.GetMouseButton(1))
         {
             transform.RotateAround(transform.parent.GetChild(0).position, Vector3.up, Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime);
+            transform.RotateAround(transform.parent.GetChild(0).position, Vector3.left, Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime);
+
+            Quaternion finalRot = transform.rotation;
+            finalRot.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
+            transform.rotation = finalRot;
         }
     }
 

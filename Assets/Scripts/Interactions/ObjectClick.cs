@@ -15,7 +15,7 @@ public class ObjectClick : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    private Planet clickedObject;
+    private Body clickedObject;
 
     /// <summary>
     /// 
@@ -38,13 +38,13 @@ public class ObjectClick : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                clickedObject = hit.collider.transform.parent.GetComponent<Planet>();
+                clickedObject = hit.collider.transform.parent.GetComponent<Body>();
                 timeout = 5f;
             }
         }
 
         if (timeout > 0 && clickedObject != null) Draw();
-        else Reset();
+        else Reset();   
     }
 
     private void Draw()
@@ -52,7 +52,8 @@ public class ObjectClick : MonoBehaviour
         clickedObjectMetre.transform.GetChild(0).GetComponent<Text>().text = "Selected: " + clickedObject.transform.name;
 
         float distance = Vector3.Distance(transform.position, clickedObject.transform.position) - clickedObject.GetLength();
-        clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * 100) + "km";
+        if (clickedObject.GetComponent<Planet>()) clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * 100) + "km";
+        else clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * .5f) + "km";
 
         timeout -= 1 * Time.deltaTime;
     }

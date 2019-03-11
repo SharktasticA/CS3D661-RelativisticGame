@@ -10,6 +10,7 @@ TagManager:
   - ClickedObjectMetre
   - Warning
   - RotatablePart
+  - Sun
   layers:
   - Default
   - TransparentFX

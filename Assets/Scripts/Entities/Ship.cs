@@ -4,7 +4,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Enumeration of possible speed factors the ship's impulse engines can support.
 /// </summary>
-public enum SpeedFactor { Reverse = -8, Zero = 0, One = 16, Two = 8, Three = 4, Full = 1 };
+public enum SpeedFactor { Reverse = -16, Zero = 0, One = 256, Two = 32, Three = 4, Full = 1 };
 
 /// <summary>
 /// Body-subclass for scene ship objects.
@@ -48,7 +48,7 @@ class Ship : Body
 
         //Ensure all rotatable ship parts turn at the proper speed
         for (int i = 0; i < rotatables.Length; i++)
-            rotatables[i].SetSpeed(speed * 2.5f);
+            rotatables[i].SetSpeed(speed * 10f);
 
         //Update all relativistic UI display readouts
         relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = "Speed: " + GetSpeedKMS() + "km/s";
