@@ -36,6 +36,30 @@ public class FloatingOrigin : MonoBehaviour
             foreach (Transform t in objs)
                 if (!t.parent)
                     t.position -= camPos;
+
+            //ParticleSystem[] psObjs = FindObjectsOfType<ParticleSystem>();
+            //foreach (ParticleSystem ps in psObjs)
+            //{
+            //    if (ps.main.simulationSpace != ParticleSystemSimulationSpace.World)
+            //        continue;
+
+            //    bool wasPaused = ps.isPaused;
+            //    bool wasPlaying = ps.isPlaying;
+
+            //    if (!wasPaused)
+            //        ps.Pause();
+
+            //    ParticleSystem.Particle[] parts = new ParticleSystem.Particle[ps.particleCount];
+            //    int pNeeded = ps.GetParticles(parts);
+
+            //    for (int i = 0; i < pNeeded; i++)
+            //        parts[i].position -= camPos;
+
+            //    ps.SetParticles(parts, pNeeded);
+
+            //    if (wasPlaying)
+            //        ps.Play();
+            //}
         }
 
         if (physicsThreshold > 0f)
