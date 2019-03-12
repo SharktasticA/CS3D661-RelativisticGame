@@ -48,7 +48,7 @@ class Ship : Body
 
         //Ensure all rotatable ship parts turn at the proper speed
         for (int i = 0; i < rotatables.Length; i++)
-            rotatables[i].SetSpeed(speed * 10f);
+            rotatables[i].SetSpeed(speed * 24f);
 
         //Update all relativistic UI display readouts
         relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = "Speed: " + GetSpeedKMS() + "km/s";

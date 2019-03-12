@@ -29,6 +29,11 @@ public class Body : MonoBehaviour
     /// </summary>
     private Vector3 lastPos;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    private float initSpeedCooldown = 1f;
+
     private void Awake()
     {
         //Get reference to RB
@@ -37,10 +42,14 @@ public class Body : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Work out speed due to gravity pull so that non-ship objects can have
-        //some sort of speed reading.
-        speed += (transform.position - lastPos).magnitude * Time.fixedDeltaTime;
-        lastPos = transform.position;
+        if (initSpeedCooldown <= 0)
+        {
+            //Work out speed due to gravity pull so that non-ship objects can have
+            //some sort of speed reading.
+            speed += (transform.position - lastPos).magnitude * Time.fixedDeltaTime;
+            lastPos = transform.position;
+        }
+        else initSpeedCooldown -= 1f * Time.fixedDeltaTime;
     }
 
     /// <summary>

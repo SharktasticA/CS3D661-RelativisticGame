@@ -15,7 +15,7 @@ public class Starfield : MonoBehaviour
     /// 
     /// </summary>
     [SerializeField]
-    private int maxStars = 1024;
+    private int maxStars = 2560;
 
     /// <summary>
     /// 
@@ -27,7 +27,13 @@ public class Starfield : MonoBehaviour
     /// 
     /// </summary>
     [SerializeField]
-    private float fieldDiametre = 5f;
+    private float fieldDiametre = 100f;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField]
+    private float clipLimit = 1f;
 
     /// <summary>
     /// 
@@ -50,13 +56,13 @@ public class Starfield : MonoBehaviour
         //
         for (int i = 0; i < maxStars; i++)
         {
-            float randX = Random.Range(-fieldDiametre, fieldDiametre);
-            float randY = Random.Range(-fieldDiametre, fieldDiametre);
-            float randZ = Random.Range(-fieldDiametre, fieldDiametre);
+            float randX = Random.Range(-(fieldDiametre / 2), (fieldDiametre / 2));
+            float randY = Random.Range(-(fieldDiametre / 2), (fieldDiametre / 2));
+            float randZ = Random.Range(-(fieldDiametre / 2), (fieldDiametre / 2));
 
             stars[i].position = new Vector3(randX, randY, randZ);
             stars[i].startSize = starSize;
-            stars[i].startColor = new Color(255, 255, 255, Random.Range(200, 255));
+            stars[i].startColor = new Color(255, 255, 255, Random.Range(155, 255));
         }
 
         //
@@ -67,27 +73,35 @@ public class Starfield : MonoBehaviour
     {
         ship = FindObjectOfType<Ship>();
         transform.position = ship.transform.position;
-        transform.rotation = ship.transform.rotation;
     }
 
     private void Update()
     {
         //
         if (particles == null) createStars();
-
-        //if (Vector3.Distance(transform.position, ship.transform.position) > fieldDiametre) transform.position = ship.transform.position;
+        
+        if (Vector3.Distance(transform.position, ship.transform.position) > 100) transform.position = new Vector3(0, 0, 0);
 
         for (int i = 0; i < maxStars; i++)
         {
             //
-            if (Mathf.Pow(Vector3.Distance(stars[i].position, ship.transform.position), 2) > Mathf.Pow(fieldDiametre, 2))
+            float starDist = Vector3.Distance(stars[i].position, ship.transform.position);
+
+            //
+            if (starDist > fieldDiametre)
             {
-                float randX = Random.Range(-fieldDiametre, fieldDiametre);
-                float randY = Random.Range(-fieldDiametre, fieldDiametre);
-                float randZ = Random.Range(-fieldDiametre, fieldDiametre);
+                float randX = Random.Range(-(fieldDiametre / 2), (fieldDiametre / 2));
+                float randY = Random.Range(-(fieldDiametre / 2), (fieldDiametre / 2));
+                float randZ = Random.Range(-(fieldDiametre / 2), (fieldDiametre / 2));
 
                 stars[i].position = new Vector3(randX, randY, randZ) + ship.transform.position;
             }
+
+            //
+            if (starDist < clipLimit)
+                stars[i].startColor = new Color(0, 0, 0, 0);
+            else
+                stars[i].startColor = new Color(255, 255, 255, Random.Range(155, 255));
         }
 
         //
