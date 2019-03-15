@@ -20,31 +20,23 @@ public class Asteroid : Body
     /// <summary>
     /// 
     /// </summary>
-    private float rotationSpeedX;
-    /// <summary>
-    /// 
-    /// </summary>
-    private float rotationSpeedY;
-    /// <summary>
-    /// 
-    /// </summary>
-    private float rotationSpeedZ;
-
-    /// <summary>
-    /// 
-    /// </summary>
     private float rotationSpeed;
 
     private void Start()
     {
+        //Give the asteroid's properties some variance
+        rb.mass *= Random.Range(0.5f, 1.5f);
+        transform.localScale = new Vector3(
+            transform.localScale.x * Random.Range(0.5f, 1.5f),
+            transform.localScale.y * Random.Range(0.5f, 1.5f),
+            transform.localScale.z * Random.Range(0.5f, 1.5f));
+
         body = transform.GetChild(0);
-        rotationSpeedX = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeedY = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeedZ = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+        rotationSpeed = Random.Range(-maxRotationSpeed, maxRotationSpeed);
     }
 
     private void Update()
     {
-        body.rotation = body.rotation * Quaternion.Euler(rotationSpeedX * Time.deltaTime, rotationSpeedY * Time.deltaTime, rotationSpeedZ * Time.deltaTime);
+        body.rotation = body.rotation * Quaternion.Euler(rotationSpeed * Time.deltaTime, rotationSpeed * Time.deltaTime, rotationSpeed * Time.deltaTime);
     }
 }

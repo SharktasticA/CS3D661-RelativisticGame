@@ -67,7 +67,7 @@ class Ship : Body
     /// </summary>
     public float GetSpeedTarget()
     {
-        if (speedFactor == SpeedFactor.Zero) return 0;
+        if (speedFactor == SpeedFactor.Zero) return 0.001f;
         else return maxSpeed / (int)speedFactor;
     }
 
@@ -75,5 +75,9 @@ class Ship : Body
     /// Accepts and sets the ship's impulse factor setting.
     /// </summary>
     /// <param name="nSpeed">New SpeedFactor setting for the ship's impulse engines.</param>
-    public void SetSpeedFactor(SpeedFactor nSpeed) { speedFactor = nSpeed; }
+    public void SetSpeedFactor(SpeedFactor nSpeed)
+    {
+        speedFactor = nSpeed;
+        DampenInertia();
+    }
 }

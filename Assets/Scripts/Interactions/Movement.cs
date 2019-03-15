@@ -120,6 +120,11 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(3).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
         }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ship.DampenInertia();
+        }
     }
 
     /// <summary>
@@ -128,16 +133,16 @@ public class Movement : MonoBehaviour
     void ManageRotation()
     {
         //
-        if (Input.GetKey(KeyCode.W)) transform.GetChild(0).Rotate(Vector3.left * (sensitivity / 8) * Time.fixedDeltaTime);
-        else if (Input.GetKey(KeyCode.S)) transform.GetChild(0).Rotate(Vector3.right * (sensitivity / 8) * Time.fixedDeltaTime);
+        if (Input.GetKey(KeyCode.W)) transform.GetChild(0).Rotate(Vector3.left * (sensitivity / 4) * Time.fixedDeltaTime);
+        else if (Input.GetKey(KeyCode.S)) transform.GetChild(0).Rotate(Vector3.right * (sensitivity / 4) * Time.fixedDeltaTime);
 
         //
-        if (Input.GetKey(KeyCode.A)) transform.GetChild(0).Rotate(Vector3.down * (sensitivity / 8) * Time.fixedDeltaTime);
-        else if (Input.GetKey(KeyCode.D)) transform.GetChild(0).Rotate(Vector3.up * (sensitivity / 8) * Time.fixedDeltaTime);
+        if (Input.GetKey(KeyCode.A)) transform.GetChild(0).Rotate(Vector3.down * (sensitivity / 4) * Time.fixedDeltaTime);
+        else if (Input.GetKey(KeyCode.D)) transform.GetChild(0).Rotate(Vector3.up * (sensitivity / 4) * Time.fixedDeltaTime);
 
         //
-        if (Input.GetKey(KeyCode.Q)) transform.GetChild(0).Rotate(Vector3.forward * (sensitivity / 8) * Time.fixedDeltaTime);
-        else if (Input.GetKey(KeyCode.E)) transform.GetChild(0).Rotate(Vector3.back * (sensitivity / 8) * Time.fixedDeltaTime);
+        if (Input.GetKey(KeyCode.Q)) transform.GetChild(0).Rotate(Vector3.forward * (sensitivity / 4) * Time.fixedDeltaTime);
+        else if (Input.GetKey(KeyCode.E)) transform.GetChild(0).Rotate(Vector3.back * (sensitivity / 4) * Time.fixedDeltaTime);
     }
 
     /// <summary>

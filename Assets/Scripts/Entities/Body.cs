@@ -120,4 +120,9 @@ public class Body : MonoBehaviour
     /// </summary>
     /// <param name="newGrav">The new grav.</param>
     public void StoreGrav(float newGrav) { grav = newGrav; }
+
+    /// <summary>
+    /// Resets any velocity applied to object via impacts, AddForce, or AddTorque.
+    /// </summary>
+    public void DampenInertia() { rb.velocity = rb.angularVelocity = Vector3.zero; }
 }
