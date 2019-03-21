@@ -1,45 +1,24 @@
-﻿/*
-    Player probe movement
-    Khalid Ali 2019
-*/
-
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 /// <summary>
-/// Handles impulse-based (inside star system) movement
+/// Handles ship's impulse-like movement.
 /// </summary>
 [RequireComponent(typeof(Ship))]
 public class Movement : MonoBehaviour
 {
     /// <summary>
-    /// The speed that the ship is currently at
-    /// </summary>
-    private float currentSpeed;
-
-    /// <summary>
-    /// Calculated change in rotation due to movement changes
-    /// </summary>
-    private Vector3 angleVelocity;
-
-    /// <summary>
-    /// Local reference of the ship rotation's eular angles
-    /// </summary>
-    private Vector3 shipRotation;
-
-    /// <summary>
-    /// Modifier of controlling the rate of change when the player desires a change in movement/rotation
+    /// Modifier of controlling the rate of change when the player desires a change in movement/rotation.
     /// </summary>
     [SerializeField]
     private int sensitivity = 100;
 
     /// <summary>
-    /// Local reference of the ship's variable class
+    /// Local reference of the ship's variable class.
     /// </summary>
     private Ship ship;
 
     /// <summary>
-    /// Reference to impulse factor display element
+    /// Local reference to UI metre for ship's target speed.
     /// </summary>
     private GameObject speedFactorDisplay;
 
@@ -51,17 +30,19 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        ManageImpulse();
-        ManageRotation();
-        ManageAcceleration();
+        ManageSpeed();
+        ManageOrientation();
+
+        MoveShip();
     }
 
     /// <summary>
-    /// Polls for requested changes in impulse factor and specifies desired speed for the rest of the script
+    /// Polls for player-requested changes to the ship's
+    /// target speed.
     /// </summary>
-    void ManageImpulse()
+    private void ManageSpeed()
     {
-        //check if change in warp factor is requested
+        // Poll for direct speed changes
         if (Input.GetKey(KeyCode.Alpha0))
         {
             ship.SetSpeedFactor(SpeedFactor.Zero);
@@ -111,8 +92,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(true);
             ship.SetSpeedFactor(SpeedFactor.Reverse);
         }
-
-        if (ship.GetSpeedFactor() == SpeedFactor.Zero)
+        else if (ship.GetSpeedFactor() == SpeedFactor.Zero)
         {
             speedFactorDisplay.transform.GetChild(0).gameObject.SetActive(false);
             speedFactorDisplay.transform.GetChild(1).gameObject.SetActive(false);
@@ -121,6 +101,7 @@ public class Movement : MonoBehaviour
             speedFactorDisplay.transform.GetChild(4).gameObject.SetActive(false);
         }
 
+        // Poll for inertial dampening
         if (Input.GetKey(KeyCode.Space))
         {
             ship.DampenInertia();
@@ -128,29 +109,53 @@ public class Movement : MonoBehaviour
     }
 
     /// <summary>
-    /// Polls for requested changes in ship rotations
+    /// Polls for player-requested changes to the ship's
+    /// orientation/rotation.
     /// </summary>
-    void ManageRotation()
+    private void ManageOrientation()
     {
-        //
-        if (Input.GetKey(KeyCode.W)) transform.GetChild(0).Rotate(Vector3.left * (sensitivity / 4) * Time.fixedDeltaTime);
-        else if (Input.GetKey(KeyCode.S)) transform.GetChild(0).Rotate(Vector3.right * (sensitivity / 4) * Time.fixedDeltaTime);
+        // Poll for frontal tilt changes
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.GetChild(0).Rotate(Vector3.left * (sensitivity / 4) * Time.fixedDeltaTime);
+            ship.DampenInertia();
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            transform.GetChild(0).Rotate(Vector3.right * (sensitivity / 4) * Time.fixedDeltaTime);
+            ship.DampenInertia();
+        }
 
-        //
-        if (Input.GetKey(KeyCode.A)) transform.GetChild(0).Rotate(Vector3.down * (sensitivity / 4) * Time.fixedDeltaTime);
-        else if (Input.GetKey(KeyCode.D)) transform.GetChild(0).Rotate(Vector3.up * (sensitivity / 4) * Time.fixedDeltaTime);
+        // Poll for side banking changes
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.GetChild(0).Rotate(Vector3.down * (sensitivity / 4) * Time.fixedDeltaTime);
+            ship.DampenInertia();
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.GetChild(0).Rotate(Vector3.up * (sensitivity / 4) * Time.fixedDeltaTime);
+            ship.DampenInertia();
+        }
 
-        //
-        if (Input.GetKey(KeyCode.Q)) transform.GetChild(0).Rotate(Vector3.forward * (sensitivity / 4) * Time.fixedDeltaTime);
-        else if (Input.GetKey(KeyCode.E)) transform.GetChild(0).Rotate(Vector3.back * (sensitivity / 4) * Time.fixedDeltaTime);
+        // Poll for roll correction
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.GetChild(0).Rotate(Vector3.forward * (sensitivity / 4) * Time.fixedDeltaTime);
+            ship.DampenInertia();
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            transform.GetChild(0).Rotate(Vector3.back * (sensitivity / 4) * Time.fixedDeltaTime);
+            ship.DampenInertia();
+        }
     }
 
     /// <summary>
-    /// Ensures ship is travelling at desired speed
+    /// Just moves the ship.
     /// </summary>
-    void ManageAcceleration()
+    private void MoveShip()
     {
-        if (ship.GetSpeedFactor() == SpeedFactor.Zero) return;
         transform.Translate(transform.GetChild(0).forward * ship.GetSpeed() * Time.deltaTime, Space.World);
     }
 }

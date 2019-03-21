@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Enumaration of possible directions this object can rotate to.
+/// Enumaration of possible ways this object can rotate to.
 /// </summary>
 public enum Rotation { Clockwise = 0, Anticlockwise = 1 };
 

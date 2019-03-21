@@ -44,8 +44,8 @@ public class Body : MonoBehaviour
     {
         if (initSpeedCooldown <= 0)
         {
-            //Work out speed due to gravity pull so that non-ship objects can have
-            //some sort of speed reading.
+            // Work out speed due to gravity pull so that non-ship objects can have
+            // some sort of speed reading.
             speed += (transform.position - lastPos).magnitude * Time.fixedDeltaTime;
             lastPos = transform.position;
         }
@@ -55,7 +55,7 @@ public class Body : MonoBehaviour
     /// <summary>
     /// Returns the object's current mass.
     /// </summary>
-    public float GetMass() { return rb.mass; }
+    public virtual float GetMass() { return rb.mass; }
 
     /// <summary>
     /// Returns the object's current length (or diametre).

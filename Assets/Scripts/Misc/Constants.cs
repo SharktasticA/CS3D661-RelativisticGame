@@ -1,18 +1,18 @@
 ﻿namespace Assets
 {
     /// <summary>
-    /// 
+    /// Provides centralised physics constants.
     /// </summary>
     public static class Constants
     {
         /// <summary>
-        /// 
+        /// Speed of light in a vacuum constant. Measured in km/s.
         /// </summary>
         public const float G = 0.06674f;
 
         /// <summary>
-        /// km/s
+        /// Speed of light in a vacuum constant. Measured in km/s.
         /// </summary>
-        public const float C = 299792458f / 10000;
+        public const float c = 29979.2458f;
     }
 }

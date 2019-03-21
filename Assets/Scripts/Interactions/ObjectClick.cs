@@ -2,25 +2,34 @@
 using UnityEngine.UI;
 
 /// <summary>
-/// 
+/// Allows user to select object in scene.
 /// </summary>
 [RequireComponent(typeof(Ship))]
 public class ObjectClick : MonoBehaviour
 {
     /// <summary>
-    /// 
+    /// Local reference to UI element that holds the
+    /// Text display.
     /// </summary>
     private GameObject clickedObjectMetre;
 
     /// <summary>
-    /// 
+    /// Cached reference to last object that has been
+    /// clicked.
     /// </summary>
     private Body clickedObject;
 
     /// <summary>
-    /// 
+    /// How long it takes to timeout the UI text.
     /// </summary>
-    private float timeout = 0;
+    [SerializeField]
+    private float timeout = 5f;
+
+    /// <summary>
+    /// Internal countdown for when an object has
+    /// been clicked.
+    /// </summary>
+    private float countDown = 0;
 
     private void Start()
     {
@@ -29,24 +38,33 @@ public class ObjectClick : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
-            Reset();
+            Undraw();
 
+            // Attempt raycast towards where cursor is
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+            // If collider hit and is Body, grab ref to it
             if (Physics.Raycast(ray, out hit))
             {
-                clickedObject = hit.collider.transform.parent.GetComponent<Body>();
-                timeout = 5f;
+                if (hit.collider.transform.parent.GetComponent<Body>())
+                {
+                    clickedObject = hit.collider.transform.parent.GetComponent<Body>();
+                    countDown = timeout;
+                }
             }
         }
 
-        if (timeout > 0 && clickedObject != null) Draw();
-        else Reset();   
+        if (countDown > 0 && clickedObject != null) Draw();
+        else Undraw();   
     }
 
+    /// <summary>
+    /// Instructs UI text element to display data
+    /// on the clicked object.
+    /// </summary>
     private void Draw()
     {
         clickedObjectMetre.transform.GetChild(0).GetComponent<Text>().text = "Selected: " + clickedObject.transform.name;
@@ -55,13 +73,16 @@ public class ObjectClick : MonoBehaviour
         if (clickedObject.GetComponent<Planet>()) clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * 100) + "km";
         else clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * .5f) + "km";
 
-        timeout -= 1 * Time.deltaTime;
+        countDown -= 1 * Time.deltaTime;
     }
 
-    private void Reset()
+    /// <summary>
+    /// Instructs Ui text element to clear itself.
+    /// </summary>
+    private void Undraw()
     {
         clickedObjectMetre.transform.GetChild(0).GetComponent<Text>().text = "";
         clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "";
-        timeout = 0;
+        countDown = 0;
     }
 }

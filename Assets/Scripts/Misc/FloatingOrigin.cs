@@ -1,11 +1,9 @@
-﻿/*
-	Based on: http://wiki.unity3d.com/index.php/Floating_Origin
-*/
-
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// 
+/// Fix for floating-point related issues when travelling
+/// far within scene.
+/// Based on: http://wiki.unity3d.com/index.php/Floating_Origin.
 /// </summary>
 [RequireComponent(typeof(Camera))]
 public class FloatingOrigin : MonoBehaviour
@@ -36,30 +34,6 @@ public class FloatingOrigin : MonoBehaviour
             foreach (Transform t in objs)
                 if (!t.parent)
                     t.position -= camPos;
-
-            //ParticleSystem[] psObjs = FindObjectsOfType<ParticleSystem>();
-            //foreach (ParticleSystem ps in psObjs)
-            //{
-            //    if (ps.main.simulationSpace != ParticleSystemSimulationSpace.World)
-            //        continue;
-
-            //    bool wasPaused = ps.isPaused;
-            //    bool wasPlaying = ps.isPlaying;
-
-            //    if (!wasPaused)
-            //        ps.Pause();
-
-            //    ParticleSystem.Particle[] parts = new ParticleSystem.Particle[ps.particleCount];
-            //    int pNeeded = ps.GetParticles(parts);
-
-            //    for (int i = 0; i < pNeeded; i++)
-            //        parts[i].position -= camPos;
-
-            //    ps.SetParticles(parts, pNeeded);
-
-            //    if (wasPlaying)
-            //        ps.Play();
-            //}
         }
 
         if (physicsThreshold > 0f)

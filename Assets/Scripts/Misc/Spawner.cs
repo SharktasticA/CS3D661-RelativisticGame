@@ -23,13 +23,13 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private Vector3 spawnAxisMax = new Vector3(100, 100, 100);
 
-    private void Start()
+    private void Awake()
     {
-        //If no prefabs given, just kill this script
+        // If no prefabs given, just kill this script
         if (prefabs.Length == 0)
             Destroy(this);
 
-        //Randomly spawn prefabs until we have the right amount
+        // Randomly spawn prefabs until we have the right amount
         for (int i = 0; i < amount; i++)
         {
             Vector3 randPos = new Vector3(
@@ -37,11 +37,13 @@ public class Spawner : MonoBehaviour
                 Random.Range(-spawnAxisMax.y, spawnAxisMax.y),
                 Random.Range(-spawnAxisMax.z, spawnAxisMax.z));
 
-            GameObject obj = Instantiate(prefabs[Random.Range(0, prefabs.Length)], transform.position + randPos, Quaternion.identity, transform);
-            //obj.transform.parent = transform.parent;
+            Instantiate(prefabs[Random.Range(0, prefabs.Length)], transform.position + randPos, Quaternion.identity, transform);
         }
     }
 
+    /// <summary>
+    /// Allows the spawn field to be visisble in inspector.
+    /// </summary>
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1, 0, 0, 1);
