@@ -571,6 +571,16 @@ Prefab:
       propertyPath: collectiveMassDist
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114321721502683010, guid: 50f268d68458aea4284f85c8afd715c9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114008898994218484, guid: 50f268d68458aea4284f85c8afd715c9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50f268d68458aea4284f85c8afd715c9, type: 2}
   m_IsPrefabAsset: 0
@@ -5722,9 +5732,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef1adf5f75f9274d8c83d9d7886ff0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxStars: 1024
+  maxStars: 512
   starSize: 0.025
-  fieldDiametre: 128
+  fieldDiametre: 256
   clipLimit: 1
 --- !u!114 &1320422038
 MonoBehaviour:
@@ -6184,7 +6194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1801133778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6478,3 +6488,19 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1958056193}
   m_CullTransparentMesh: 0
+--- !u!1 &2139414151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1402952421912920, guid: 50f268d68458aea4284f85c8afd715c9,
+    type: 2}
+  m_PrefabInternal: {fileID: 860444707}
+--- !u!114 &2139414161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2139414151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb44b43e937311e48a122ddecc7720fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
