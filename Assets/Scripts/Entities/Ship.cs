@@ -16,7 +16,7 @@ class Ship : Body
     /// Maximum speed of ship when at SpeedFactor.Full.
     /// </summary>
     [SerializeField]
-    private readonly float maxSpeed = 250f;
+    private float maxSpeed = 250f;
 
     /// <summary>
     /// Speed factor that the ship is set to use.
@@ -27,7 +27,7 @@ class Ship : Body
     /// Distance in which asteroid's mass are counted as yours.
     /// </summary>
     [SerializeField]
-    private readonly float collectiveMassDist = 2f;
+    private float collectiveMassDist = 2f;
 
     /// <summary>
     /// Internal reference to relativistics UI display.
@@ -73,13 +73,13 @@ class Ship : Body
     public override float GetMass()
     {
         float localisedMass = rb.mass;
-        Collider[] nearby = Physics.OverlapSphere(transform.position, Mathf.Pow(collectiveMassDist, 2));
+        //Collider[] nearby = Physics.OverlapSphere(transform.position, Mathf.Pow(collectiveMassDist, 2));
         
-        for (int i = 0; i < nearby.Length; i++)
-        {
-            if (nearby[i].transform.parent.GetComponent<Asteroid>())
-                localisedMass += nearby[i].transform.parent.GetComponent<Asteroid>().GetMass();
-        }
+        //for (int i = 0; i < nearby.Length; i++)
+        //{
+        //    if (nearby[i].transform.parent.GetComponent<Asteroid>())
+        //        localisedMass += nearby[i].transform.parent.GetComponent<Asteroid>().GetMass();
+        //}
 
         return localisedMass;
     }

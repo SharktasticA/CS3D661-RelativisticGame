@@ -23,7 +23,7 @@ public class ObjectClick : MonoBehaviour
     /// How long it takes to timeout the UI text.
     /// </summary>
     [SerializeField]
-    private float timeout = 5f;
+    private float timeout = 10f;
 
     /// <summary>
     /// Internal countdown for when an object has
@@ -38,7 +38,7 @@ public class ObjectClick : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             Undraw();
 
@@ -49,6 +49,11 @@ public class ObjectClick : MonoBehaviour
             // If collider hit and is Body, grab ref to it
             if (Physics.Raycast(ray, out hit))
             {
+                // If the user clicked the ship, just do
+                // nothing
+                if (hit.collider.GetComponent<Ship>())
+                    return;
+
                 if (hit.collider.transform.parent.GetComponent<Body>())
                 {
                     clickedObject = hit.collider.transform.parent.GetComponent<Body>();
