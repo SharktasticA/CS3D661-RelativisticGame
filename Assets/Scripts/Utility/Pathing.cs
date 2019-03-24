@@ -53,8 +53,7 @@ public class Pathing : MonoBehaviour
             //Debug.Log("Pathing: each position must have a corresponding speed (and vice versa)");
             Destroy(this);
         }
-
-        GetComponent<Movement>().enabled = false;
+        
         ship = GetComponent<Ship>();
         Time.timeScale -= 0.1f;
     }
@@ -66,8 +65,8 @@ public class Pathing : MonoBehaviour
         {
             //Debug.Log("Pathing: all positions visited");
             ship.SetSpeedFactor(SpeedFactor.Zero);
-            GetComponent<Movement>().enabled = true;
             Destroy(this);
+            return;
         }
 
         //

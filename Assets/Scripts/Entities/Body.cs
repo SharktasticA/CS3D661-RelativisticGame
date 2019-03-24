@@ -53,6 +53,16 @@ public class Body : MonoBehaviour
     }
 
     /// <summary>
+    /// Allows this Body to be destroyed externally.
+    /// </summary>
+    /// <param name="cause">Message of destruction cause for debugging.</param>
+    public virtual void DestroyBody(string cause = "nothing")
+    {
+        Debug.Log(transform.name + " destroyed by: " + cause);
+        DestroyImmediate(gameObject);
+    }
+
+    /// <summary>
     /// Returns the object's current mass.
     /// </summary>
     public virtual float GetMass() { return rb.mass; }

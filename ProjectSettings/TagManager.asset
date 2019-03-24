@@ -11,6 +11,7 @@ TagManager:
   - Warning
   - RotatablePart
   - Sun
+  - DeathCamera
   layers:
   - Default
   - TransparentFX

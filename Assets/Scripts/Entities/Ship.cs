@@ -19,6 +19,12 @@ class Ship : Body
     private float maxSpeed = 250f;
 
     /// <summary>
+    /// Allows the ship part rotation speed to be multiplied.
+    /// </summary>
+    [SerializeField]
+    private float rotationModifier = 24f;
+
+    /// <summary>
     /// Speed factor that the ship is set to use.
     /// </summary>
     private SpeedFactor speedFactor = SpeedFactor.Zero;
@@ -54,7 +60,7 @@ class Ship : Body
 
         // Ensure all rotatable ship parts turn at the proper speed
         for (int i = 0; i < rotatables.Length; i++)
-            rotatables[i].SetSpeed(speed * 24f);
+            rotatables[i].SetSpeed(speed * rotationModifier);
 
         // Update all relativistic UI display readouts
         if (relativisticsMetre)
@@ -64,6 +70,17 @@ class Ship : Body
             relativisticsMetre.transform.GetChild(2).GetComponent<Text>().text = "Mass: " + GetMass() * 1000 + "kg";
             relativisticsMetre.transform.GetChild(3).GetComponent<Text>().text = "Length: " + GetLength() * 100 + "N";
         }
+    }
+
+    /// <summary>
+    /// Allows this Ship to be destroyed externally.
+    /// </summary>
+    /// <param name="cause">Message of destruction cause for debugging.</param>
+    public override void DestroyBody(string cause = "nothing")
+    {
+        Debug.Log(GameObject.FindGameObjectWithTag("DeathCamera"));
+        GameObject.FindGameObjectWithTag("DeathCamera").SetActive(true);
+        base.DestroyBody();
     }
 
     /// <summary>
