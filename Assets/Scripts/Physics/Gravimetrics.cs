@@ -18,11 +18,6 @@ public class Gravimetrics : MonoBehaviour
     /// </summary>
     List<Body> others = new List<Body>();
 
-    /// <summary>
-    /// Cached total gravitational force calculated in a given physics update.
-    /// </summary>
-    float totalGrav = 0;
-
     private void Start()
     {
         body = GetComponent<Body>();
@@ -39,8 +34,7 @@ public class Gravimetrics : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Always reset cache
-        totalGrav = 0;
+        Vector3 fGrav = Vector3.zero;
 
         for (int i = 0; i < others.Count; i++)
         {
@@ -57,19 +51,18 @@ public class Gravimetrics : MonoBehaviour
 
                 // Magnitude (strength) of gravitational force
                 float magnitude = Constants.G * (others[i].GetMass() * body.GetMass() / Mathf.Pow(distance, 2));
-                totalGrav += magnitude;
 
                 // Convert calculation into workable force
                 // Normalised to turn the direction into a length of 1,
                 // which is then amplified by the force magnitude
-                Vector3 force = ((thisPos - otherPos).normalized * magnitude) * Time.fixedDeltaTime;
-
-                // Apply force
-                body.ApplyForce(-force);
+                fGrav += ((thisPos - otherPos).normalized * magnitude) * Time.fixedDeltaTime;
             }
         }
 
+        // Apply force
+        body.ApplyForce(-fGrav);
+
         // Cache totalGrav into this Body in case it is needed further
-        body.StoreGrav(totalGrav);
+        body.StoreGrav(fGrav.magnitude);
     }
 }

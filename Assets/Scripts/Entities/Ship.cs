@@ -65,10 +65,10 @@ class Ship : Body
         // Update all relativistic UI display readouts
         if (relativisticsMetre)
         {
-            relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = "Speed: " + GetSpeedKMS() + "km/s";
-            relativisticsMetre.transform.GetChild(1).GetComponent<Text>().text = "Gravity: " + GetGrav() + "g";
-            relativisticsMetre.transform.GetChild(2).GetComponent<Text>().text = "Mass: " + GetMass() * 1000 + "kg";
-            relativisticsMetre.transform.GetChild(3).GetComponent<Text>().text = "Length: " + GetLength() * 100 + "N";
+            relativisticsMetre.transform.GetChild(0).GetComponent<Text>().text = GetSpeedKMS() + "km/s";
+            relativisticsMetre.transform.GetChild(1).GetComponent<Text>().text = GetGrav() + "N";
+            relativisticsMetre.transform.GetChild(2).GetComponent<Text>().text = GetMass() * 1000 + "kg";
+            relativisticsMetre.transform.GetChild(3).GetComponent<Text>().text = GetLength() * 100 + "m";
         }
     }
 

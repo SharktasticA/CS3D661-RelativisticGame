@@ -75,8 +75,8 @@ public class ObjectClick : MonoBehaviour
         clickedObjectMetre.transform.GetChild(0).GetComponent<Text>().text = "Selected: " + clickedObject.transform.name;
 
         float distance = Vector3.Distance(transform.position, clickedObject.transform.position) - clickedObject.GetLength();
-        if (clickedObject.GetComponent<Planet>()) clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * 100) + "km";
-        else clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * .5f) + "km";
+        if (clickedObject.GetComponent<Planet>())
+            clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * 1000) + "km";
 
         countDown -= 1 * Time.deltaTime;
     }

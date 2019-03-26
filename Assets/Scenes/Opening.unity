@@ -780,7 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitRotation: 1
-  rotationSpeed: 0.075
+  rotationSpeed: 0.75
 --- !u!114 &718543606
 MonoBehaviour:
   m_ObjectHideFlags: 0

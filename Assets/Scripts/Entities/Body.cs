@@ -80,7 +80,7 @@ public class Body : MonoBehaviour
     /// <summary>
     /// Returns the object's speed in kilometres per second.
     /// </summary>
-    public float GetSpeedKMS() { return speed * 100; }
+    public float GetSpeedKMS() { return speed * 1000; }
 
     /// <summary>
     /// Returns the object's speed in kilometres per hour.

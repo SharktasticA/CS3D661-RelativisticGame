@@ -21,7 +21,7 @@ class Planet : Body
     /// The speed you want this planet to rotate by.
     /// </summary>
     [SerializeField]
-    private float rotationSpeed = 0.5f;
+    private float rotationSpeed = 0.05f;
 
     private void Update()
     {

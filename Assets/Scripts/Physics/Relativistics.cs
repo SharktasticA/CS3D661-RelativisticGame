@@ -38,12 +38,9 @@ public class Relativistics : MonoBehaviour
     {
         if (body)
         {
-            // Get and store current physics update Lorentz result
-            beta = Beta(body.GetSpeedKMS());
-
             // Get relativistic mass and length values
-            float rMass = M(startMass, beta);
-            float rlength = L(startLength, beta);
+            float rMass = M(startMass, Beta(body.GetSpeedKMS()));
+            float rlength = L(startLength, Beta(body.GetSpeedKMS() / 10));
 
             // If value isn't invalid, apply R to body
             if (!float.IsNaN(rMass))
