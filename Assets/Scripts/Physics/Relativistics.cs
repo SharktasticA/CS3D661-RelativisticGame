@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Assets;
 
 /// <summary>
 /// Relativistic physics simulation.
@@ -11,6 +10,11 @@ public class Relativistics : MonoBehaviour
     /// Internal reference to body to apply effects to.
     /// </summary>
     private Body body;
+
+    /// <summary>
+    /// Internal reference to Constants container.
+    /// </summary>
+    private Constants constants;
 
     /// <summary>
     /// Cached start mass from the body.
@@ -30,6 +34,7 @@ public class Relativistics : MonoBehaviour
     private void Start()
     {
         body = GetComponent<Body>();
+        constants = FindObjectOfType<Constants>();
         startMass = GetComponent<Body>().GetMass();
         startLength = GetComponent<Body>().GetLength();
     }
@@ -39,8 +44,8 @@ public class Relativistics : MonoBehaviour
         if (body)
         {
             // Get relativistic mass and length values
-            float rMass = M(startMass, Beta(body.GetSpeedKMS()));
-            float rlength = L(startLength, Beta(body.GetSpeedKMS() / 10));
+            float rMass = M(startMass, Beta(body.GetSpeedKMS() * 1.125f));
+            float rlength = L(startLength, Beta(body.GetSpeedKMS()));
 
             // If value isn't invalid, apply R to body
             if (!float.IsNaN(rMass))
@@ -60,7 +65,7 @@ public class Relativistics : MonoBehaviour
     /// Evaulates current Lorentz factor for body with default speed of light constant.
     /// </summary>
     /// <param name="v">Body's current velocity magnitude.</param>
-    public float Beta(float v) { return Mathf.Sqrt(1f - Mathf.Pow(v / Constants.c, 2)); }
+    public float Beta(float v) { return Mathf.Sqrt(1f - Mathf.Pow(v / constants.C(), 2)); }
 
     /// <summary>
     /// Evaulates current Lorentz factor for body with custom speed of light constant.

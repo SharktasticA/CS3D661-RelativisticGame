@@ -12,6 +12,8 @@ TagManager:
   - RotatablePart
   - Sun
   - DeathCamera
+  - CSlider
+  - GSlider
   layers:
   - Default
   - TransparentFX

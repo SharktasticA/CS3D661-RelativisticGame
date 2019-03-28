@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Assets;
 
 /// <summary>
 /// Newtonian gravity physics simulation.
@@ -18,9 +17,15 @@ public class Gravimetrics : MonoBehaviour
     /// </summary>
     List<Body> others = new List<Body>();
 
+    /// <summary>
+    /// Internal reference to Constants container.
+    /// </summary>
+    private Constants constants;
+
     private void Start()
     {
         body = GetComponent<Body>();
+        constants = FindObjectOfType<Constants>();
 
         // Get all GameObjects in the scene that are flagged as "Body"
         GameObject[] otherObjs = GameObject.FindGameObjectsWithTag("Body");
@@ -50,7 +55,7 @@ public class Gravimetrics : MonoBehaviour
                 float distance = Vector3.Distance(thisPos, otherPos);
 
                 // Magnitude (strength) of gravitational force
-                float magnitude = Constants.G * (others[i].GetMass() * body.GetMass() / Mathf.Pow(distance, 2));
+                float magnitude = constants.G() * (others[i].GetMass() * body.GetMass() / Mathf.Pow(distance, 2));
 
                 // Convert calculation into workable force
                 // Normalised to turn the direction into a length of 1,
