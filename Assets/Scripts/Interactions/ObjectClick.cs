@@ -23,7 +23,7 @@ public class ObjectClick : MonoBehaviour
     /// How long it takes to timeout the UI text.
     /// </summary>
     [SerializeField]
-    private float timeout = 10f;
+    private float timeout = 5f;
 
     /// <summary>
     /// Internal countdown for when an object has
@@ -34,6 +34,7 @@ public class ObjectClick : MonoBehaviour
     private void Start()
     {
         clickedObjectMetre = GameObject.FindGameObjectWithTag("ClickedObjectMetre");
+        Undraw();
     }
 
     private void Update()
@@ -63,6 +64,7 @@ public class ObjectClick : MonoBehaviour
         }
 
         if (countDown > 0 && clickedObject != null) Draw();
+        else if (countDown == 0f) return;
         else Undraw();   
     }
 
@@ -88,6 +90,6 @@ public class ObjectClick : MonoBehaviour
     {
         clickedObjectMetre.transform.GetChild(0).GetComponent<Text>().text = "";
         clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "";
-        countDown = 0;
+        countDown = 0f;
     }
 }
