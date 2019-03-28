@@ -26,6 +26,9 @@ public class ChangeScene : MonoBehaviour
 
     private void Update()
     {
+        if (cueKey == KeyCode.None)
+            return;
+
         if (isAnyKey)
         {
             if (Input.anyKey)
@@ -36,5 +39,13 @@ public class ChangeScene : MonoBehaviour
             if (Input.GetKey(cueKey))
                 SceneManager.LoadSceneAsync(sceneIndex);
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
