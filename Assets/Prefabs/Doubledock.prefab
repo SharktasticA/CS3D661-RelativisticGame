@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 4242673532774774}
   - component: {fileID: 54346385533553528}
   - component: {fileID: 114261170024847254}
-  - component: {fileID: 114491667435229724}
   m_Layer: 11
   m_Name: Doubledock
   m_TagString: Body
@@ -164,14 +163,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   tilt: 45
---- !u!114 &114491667435229724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1987199279598936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 914ab65201bb36e4ea1dd3b7495e8be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

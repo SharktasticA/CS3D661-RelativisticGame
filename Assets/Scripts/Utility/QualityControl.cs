@@ -62,7 +62,7 @@ public class QualityControl : MonoBehaviour
             mCamera.GetComponent<FlareLayer>().enabled = true;
         }
 
-        QualitySettings.SetQualityLevel((int)newLevel);
+        QualitySettings.SetQualityLevel(newLevel);
         quality = (QualityLevel)newLevel;
 
         if (vSyncToggle)

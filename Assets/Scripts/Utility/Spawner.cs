@@ -12,6 +12,20 @@ public class Spawner : MonoBehaviour
     private GameObject[] prefabs;
 
     /// <summary>
+    /// Naming convention for the object's
+    /// transform name.
+    /// </summary>
+    [SerializeField]
+    private string nomenclature = "Asteroid";
+
+    /// <summary>
+    /// Maximise size modifier percentage
+    /// for scale randomisation.
+    /// </summary>
+    [SerializeField]
+    private float randSizeMaxPct = 5f;
+
+    /// <summary>
     /// Amount of GameObjects to spawn.
     /// </summary>
     [SerializeField]
@@ -21,7 +35,7 @@ public class Spawner : MonoBehaviour
     /// Maximum spawn distance magnitude for all dimensions.
     /// </summary>
     [SerializeField]
-    private Vector3 spawnAxisMax = new Vector3(100, 100, 100);
+    private Vector3 spawnAxisMax = new Vector3(128, 128, 128);
 
     private void Awake()
     {
@@ -37,7 +51,14 @@ public class Spawner : MonoBehaviour
                 Random.Range(-spawnAxisMax.y, spawnAxisMax.y),
                 Random.Range(-spawnAxisMax.z, spawnAxisMax.z));
 
-            Instantiate(prefabs[Random.Range(0, prefabs.Length)], transform.position + randPos, Quaternion.identity, transform);
+            Vector3 randRot = new Vector3(
+                Random.Range(0, 359),
+                Random.Range(0, 359),
+                Random.Range(0, 359));
+
+            GameObject obj = Instantiate(prefabs[Random.Range(0, prefabs.Length)], transform.position + randPos, Quaternion.identity * Quaternion.Euler(randRot), transform);
+            obj.transform.localScale *= Random.Range(-randSizeMaxPct, randSizeMaxPct);
+            obj.transform.name = nomenclature + "-" + Random.Range(0, 99999);
         }
     }
 

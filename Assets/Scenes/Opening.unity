@@ -780,7 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitRotation: 1
-  rotationSpeed: 0.75
+  rotationSpeed: 0.075
 --- !u!114 &718543606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -949,7 +949,6 @@ GameObject:
   - component: {fileID: 1127907326}
   - component: {fileID: 1127907325}
   - component: {fileID: 1127907324}
-  - component: {fileID: 1127907323}
   - component: {fileID: 1127907322}
   m_Layer: 8
   m_Name: OeProbe
@@ -974,18 +973,6 @@ MonoBehaviour:
   - {x: 5.25, y: 0.075, z: 30.25}
   speeds: 01000000
   targetDist: 0.1
---- !u!114 &1127907323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114983508700651390, guid: 50f268d68458aea4284f85c8afd715c9,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1127907321}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da55fbfa4248c5d448f20c2246c265a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1127907324
 MonoBehaviour:
   m_ObjectHideFlags: 0

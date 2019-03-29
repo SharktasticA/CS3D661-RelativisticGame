@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4798804397428266}
   - component: {fileID: 54261363005365464}
   - component: {fileID: 114338352527732726}
-  - component: {fileID: 114154032565802334}
   m_Layer: 11
   m_Name: Earth Basedock
   m_TagString: Body
@@ -235,17 +234,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 1.00000005e-20
   m_Mesh: {fileID: 4300000, guid: f7f924bf97bd06740933094be9065d2e, type: 3}
---- !u!114 &114154032565802334
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1527651788958316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 914ab65201bb36e4ea1dd3b7495e8be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114196152477950362
 MonoBehaviour:
   m_ObjectHideFlags: 1

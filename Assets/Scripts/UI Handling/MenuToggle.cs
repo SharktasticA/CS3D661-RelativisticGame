@@ -1,21 +1,30 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// 
+/// Allows a menu to be toggled in and out
+/// of view without disabling the GameObject.
 /// </summary>
 public class MenuToggle : MonoBehaviour
 {
     /// <summary>
-    /// 
+    /// Reference to menu the code is going to
+    /// toggle.
     /// </summary>
     [SerializeField]
     private GameObject menu;
 
     /// <summary>
-    /// 
+    /// Flags whether the menu needs to be hidden
+    /// at launch.
     /// </summary>
     [SerializeField]
     private bool startHidden = false;
+
+    /// <summary>
+    /// Specifies which keys toggles with menu.
+    /// </summary>
+    [SerializeField]
+    private KeyCode cueKey = KeyCode.Escape;
 
     private void Start()
     {
@@ -28,7 +37,7 @@ public class MenuToggle : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(cueKey))
         {
             if (menu.GetComponent<CanvasGroup>().alpha == 0f) ShowMenu();
             else HideMenu();
@@ -36,7 +45,7 @@ public class MenuToggle : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Shows this menu.
     /// </summary>
     public void ShowMenu()
     {
@@ -45,7 +54,7 @@ public class MenuToggle : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Hides this menu.
     /// </summary>
     public void HideMenu()
     {

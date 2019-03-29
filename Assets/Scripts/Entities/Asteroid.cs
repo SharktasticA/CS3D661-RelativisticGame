@@ -15,7 +15,7 @@ public class Asteroid : Body
     /// Speed in which the physical model is rotated.
     /// </summary>
     [SerializeField]
-    private float rotationSpeed = 1f;
+    private float rotationSpeed = 16f;
 
     private void Start()
     {
