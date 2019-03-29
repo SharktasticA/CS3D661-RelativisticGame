@@ -22,10 +22,18 @@ public class Gravimetrics : MonoBehaviour
     /// </summary>
     private Constants constants;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    private bool isShip = true;
+
     private void Start()
     {
         body = GetComponent<Body>();
         constants = FindObjectOfType<Constants>();
+
+        if (GetComponent<Ship>())
+            isShip = true;
 
         // Get all GameObjects in the scene that are flagged as "Body"
         GameObject[] otherObjs = GameObject.FindGameObjectsWithTag("Body");
@@ -55,7 +63,19 @@ public class Gravimetrics : MonoBehaviour
                 float distance = Vector3.Distance(thisPos, otherPos);
 
                 // Magnitude (strength) of gravitational force
-                float magnitude = constants.G() * (others[i].GetMass() * body.GetMass() / Mathf.Pow(distance, 2));
+                float magnitude;
+
+                // HACK: if asteroid, triple the force since to 
+                // compensate for their lack of Gravimetrics
+                // script.
+                if (others[i].GetComponent<Asteroid>() && isShip)
+                {
+                    magnitude = constants.G() * ((others[i].GetMass() * 1024) * body.GetMass() / Mathf.Pow(distance, 2));
+                    if (distance < 100f)
+                        magnitude *= (100f - distance);
+                }
+                else
+                    magnitude = constants.G() * (others[i].GetMass() * body.GetMass() / Mathf.Pow(distance, 2));
 
                 // Convert calculation into workable force
                 // Normalised to turn the direction into a length of 1,

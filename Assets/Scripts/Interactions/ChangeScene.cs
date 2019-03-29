@@ -32,12 +32,12 @@ public class ChangeScene : MonoBehaviour
         if (isAnyKey)
         {
             if (Input.anyKey)
-                SceneManager.LoadSceneAsync(sceneIndex);
+                SceneManager.LoadScene(sceneIndex);
         }
         else
         {
             if (Input.GetKey(cueKey))
-                SceneManager.LoadSceneAsync(sceneIndex);
+                SceneManager.LoadScene(sceneIndex);
         }
     }
 

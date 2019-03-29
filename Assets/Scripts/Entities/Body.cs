@@ -2,7 +2,7 @@
 
 /// <summary>
 /// Basic physics-enabled scene object class. This class is inherited
-/// by Planet, Ship.
+/// by Ship, Station, Planet, and Asteroid.
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class Body : MonoBehaviour
@@ -36,7 +36,7 @@ public class Body : MonoBehaviour
 
     private void Awake()
     {
-        //Get reference to RB
+        // Get reference to RB
         rb = GetComponent<Rigidbody>();
     }
 

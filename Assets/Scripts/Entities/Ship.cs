@@ -45,6 +45,11 @@ class Ship : Body
     /// </summary>
     private Rotator[] rotatables;
 
+    /// <summary>
+    /// Calculated collection of mass from nearby objects;
+    /// </summary>
+    private float localisedMass = 0f;
+
     private void Start()
     {
         // Get relativistics UI reference
@@ -78,28 +83,32 @@ class Ship : Body
     /// <param name="cause">Message of destruction cause for debugging.</param>
     public override void DestroyBody(string cause = "nothing")
     {
-        Debug.Log(GameObject.FindGameObjectWithTag("DeathCamera"));
-        GameObject.FindGameObjectWithTag("DeathCamera").SetActive(true);
+        GameObject.FindGameObjectsWithTag("MainCamera")[0].SetActive(false);
+        GameObject.FindGameObjectsWithTag("MainCanvas")[0].GetComponent<CanvasGroup>().blocksRaycasts = GameObject.FindGameObjectsWithTag("MainCanvas")[0].GetComponent<CanvasGroup>().interactable = false;
+        GameObject.FindGameObjectsWithTag("MainCanvas")[0].GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.FindGameObjectsWithTag("DeathCanvas")[0].GetComponent<CanvasGroup>().blocksRaycasts = GameObject.FindGameObjectsWithTag("DeathCanvas")[0].GetComponent<CanvasGroup>().interactable = true;
+        GameObject.FindGameObjectsWithTag("DeathCanvas")[0].GetComponent<CanvasGroup>().alpha = 1;
+
         base.DestroyBody();
     }
 
-    /// <summary>
-    /// Returns the object's current mass along with localised
-    /// mass from nearby asteroids.
-    /// </summary>
-    public override float GetMass()
-    {
-        float localisedMass = rb.mass;
-        //Collider[] nearby = Physics.OverlapSphere(transform.position, Mathf.Pow(collectiveMassDist, 2));
+    ///// <summary>
+    ///// Returns the object's current mass along with localised
+    ///// mass from nearby asteroids.
+    ///// </summary>
+    //public override float GetMass()
+    //{
+    //    localisedMass = rb.mass;
+    //    Collider[] nearby = Physics.OverlapSphere(transform.position, Mathf.Pow(collectiveMassDist, 2));
         
-        //for (int i = 0; i < nearby.Length; i++)
-        //{
-        //    if (nearby[i].transform.parent.GetComponent<Asteroid>())
-        //        localisedMass += nearby[i].transform.parent.GetComponent<Asteroid>().GetMass();
-        //}
+    //    for (int i = 0; i < nearby.Length; i++)
+    //    {
+    //        if (nearby[i].transform.GetComponent<Asteroid>())
+    //            localisedMass += nearby[i].transform.parent.GetComponent<Asteroid>().GetMass();
+    //    }
 
-        return localisedMass;
-    }
+    //    return localisedMass;
+    //}
 
     /// <summary>
     /// Returns ship's target speed (as SpeedFactor setting).

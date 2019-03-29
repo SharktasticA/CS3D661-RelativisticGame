@@ -79,6 +79,11 @@ public class ObjectClick : MonoBehaviour
         float distance = Vector3.Distance(transform.position, clickedObject.transform.position) - clickedObject.GetLength();
         if (clickedObject.GetComponent<Planet>())
             clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * 1000) + "km";
+        else
+        {
+            if (distance < 100)
+                clickedObjectMetre.transform.GetChild(1).GetComponent<Text>().text = "Distance: " + string.Format("{0:n0}", distance * 10) + "m";
+        }
 
         countDown -= 1 * Time.deltaTime;
     }

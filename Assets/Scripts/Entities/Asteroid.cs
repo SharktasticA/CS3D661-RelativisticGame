@@ -19,15 +19,10 @@ public class Asteroid : Body
 
     private void Start()
     {
-        //Give the asteroid's properties some variance
+        // Give the asteroid's properties some variance
         rb.mass *= Random.Range(0.5f, 1.5f);
-        transform.localScale = new Vector3(
-            transform.localScale.x * Random.Range(0.125f, 1.875f),
-            transform.localScale.y * Random.Range(0.125f, 1.875f),
-            transform.localScale.z * Random.Range(0.125f, 1.875f));
-
-        body = transform.GetChild(0);
         rotationSpeed = Random.Range(-rotationSpeed, rotationSpeed);
+        body = transform.GetChild(0);
     }
 
     private void Update()

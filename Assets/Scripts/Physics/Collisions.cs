@@ -22,7 +22,7 @@ public class Collisions : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Retrieve the Body of the object this collided with
-        Body them = collision.transform.parent.GetComponent<Body>();
+        Body them = collision.transform.GetComponent<Planet>();
 
         // If no Body present on them, get out of here
         if (!them)
@@ -32,10 +32,6 @@ public class Collisions : MonoBehaviour
 
         // If collided with planet, immediately destroy
         // vessel
-        if (them.GetComponent<Planet>())
-            body.DestroyBody();
-
         body.DestroyBody();
-
     }
 }
