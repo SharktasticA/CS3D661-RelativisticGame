@@ -9,5 +9,5 @@ Third year dissertation project - developing a game that utilises the principles
 * Lens flare: https://assetstore.unity.com/packages/tools/particles-effects/lens-flares-5
 * Asteroids: https://assetstore.unity.com/packages/3d/props/asteroid-pack-by-pixel-make-83951
 # Grade
-* Supervisor #1: 76% (Distinction)
-* Supervisor #2: 75% (Distinction)
+Report: 76% (Distinction)
+Presentation: 81% (Distinction)
